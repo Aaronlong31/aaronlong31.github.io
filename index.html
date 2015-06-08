@@ -181,7 +181,7 @@
 <p>安装后，需要运行<code>brew update</code>和<code>brew doctor</code>。<br>使用方式：<code>brew install wget</code>.</p>
 <h2 id="Homebrew_Cask"><a href="http://caskroom.io/" target="_blank" rel="external">Homebrew Cask</a></h2><p>homebrew的扩展，可以安装有图形化界面的软件。安装很简单：<code>brew install caskroom/cask/brew-cask</code>。<br>用它安装软件也很简单，<code>brew cask install xxx</code>就好，介绍几个好用的：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># &#39044;&#35272;&#25554;&#20214;&#65292;&#21487;&#20197;&#22312;Finder&#20013;&#25353;&#31354;&#26684;&#30452;&#25509;&#39044;&#35272;&#25991;&#20214;&#10;brew cask install qlcolorcode&#10;brew cask install qlstephen&#10;brew cask install qlmarkdown&#10;brew cask install quicklook-json&#10;brew cask install qlprettypatch&#10;brew cask install quicklook-csv&#10;brew cask install betterzipql&#10;brew cask install webpquicklook&#10;brew cask install suspicious-package&#10;&#10;brew cask install gitbook&#10;brew cask install github&#10;brew cask install near-lock&#10;brew cask install dash&#10;brew cask install atom&#10;brew cask install caffeine&#10;brew cask install java&#10;brew cask install qq&#10;brew cask install flashlight&#10;brew cask install dropbox&#10;brew cask install google-chrome&#10;brew cask install sequel-pro&#10;brew cask install tunnelblick&#10;brew cask install hammerspoon&#10;brew cask install sogouinput&#10;brew cask install betterzipql&#10;brew cask install quicklook-json&#10;brew cask install qlimagesize&#10;brew cask install qlstephen&#10;brew cask install qlcolorcode&#10;brew cask install sourcetree</span><br></pre></td></tr></table></figure>
-<h2 id="oh-my-zsh"><a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="external">oh-my-zsh</a></h2><p>zsh是命令行环境bash的一种替代选择，oh-my-zsh对zsh做了很多扩展，有很多插件和主题，比如git插件能直接显示当前的分支和状态，如下图：<br><a href="/images/zsh1.png">zsh</a><br>安装方式：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L <span class="string">http:</span><span class="comment">//install.ohmyz.sh | sh</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="oh-my-zsh"><a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="external">oh-my-zsh</a></h2><p>zsh是命令行环境bash的一种替代选择，oh-my-zsh对zsh做了很多扩展，有很多插件和主题，比如git插件能直接显示当前的分支和状态，如下图：<br><img src="/images/zsh1.png" alt="zsh"><br>安装方式：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L <span class="string">http:</span><span class="comment">//install.ohmyz.sh | sh</span></span><br></pre></td></tr></table></figure></p>
 <p>安装好后重新打开命令行，就能看到效果了。<br>zsh的配置文件是<code>~/.zshrc</code>，可以在里面配置theme和plugin。</p>
 <h2 id="byobu"><a href="https://help.ubuntu.com/community/Byobu" target="_blank" rel="external">byobu</a></h2><p>by obu是Ubuntu自带的，类似于screen的终端控制工具，可以多tab，多窗口，比screen好用很多。在Mac下需要通过brew安装：<code>brew install byobu</code>，效果如下图：<br><img src="/images/byobu.png" alt="byobu"><br>F2是新建tab，F3/F4在不同tab间切换。</p>
 <h2 id="Vim">Vim</h2><p>vim就不用介绍了，要说的是它的插件管理，使用<a href="https://github.com/gmarik/Vundle.vim" target="_blank" rel="external">vundle</a>.<br>详细安装方式里面介绍很详细。</p>
@@ -196,18 +196,32 @@
 <li><code>uuid</code>生成uuid；</li>
 <li><code>dash each</code>可以查询dash文档；</li>
 <li><code>zhihu daily</code>查看知乎日报；</li>
-<li>。。。<br>通过以上示例就知道这货有多强大了，还有太多功能，也可以自己写扩展。<br>Flashlight可以通过<code>brew cask install flashlight</code>安装。</li>
+<li>。。。<br>通过以上示例就知道这货有多强大了，还有太多功能，也可以自己写扩展。<br>Flashlight可以通过<code>brew cask install flashlight</code>安装。<br>另外说一点，很多人用mac喜欢把切换输入法的快捷键设置为<code>command</code>+<code>space</code>（貌似是默认的），不过我喜欢设置成<code>shift</code>+<code>command</code>+<code>space</code>，这样就能将spotlight设置成<code>command</code>+<code>space</code>了，最常用的功能要设置成最顺手的快捷键。</li>
 </ul>
 <h2 id="Dash"><a href="https://itunes.apple.com/us/app/dash-docs-snippets/id458034879?mt=12" target="_blank" rel="external">Dash</a></h2><p>查看文档的利器，可以离线下载各种开发文档，绝对满足你的需求，不过免费版有点恶心，每次查看文档需要等个8秒钟，所以还是花点钱买了吧！价格不高，不超过100￥。</p>
 <h2 id="Sublime_Text_3"><a href="http://www.sublimetext.com/3" target="_blank" rel="external">Sublime Text 3</a></h2><p>一个很漂亮也很强大的编辑器，其插件很多，安装也很方便，全得益于Package Control，不过需要自己安装，安装方式：<br>打开Sublime Text，按Ctrl + `，输入以下内容后回车：</p>
 <figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">import</span> urllib.request,os,hashlib; h = '<span class="number">7183</span>a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path<span class="params">()</span>; urllib.request.install_opener<span class="params">( urllib.request.build_opener<span class="params">( urllib.request.ProxyHandler<span class="params">()</span>)</span> )</span>; by = urllib.request.urlopen<span class="params">( 'http://sublime.wbond.net/' + pf.replace<span class="params">(' ', '%<span class="number">20</span>')</span>)</span>.read<span class="params">()</span>; dh = hashlib.sha256<span class="params">(by)</span>.hexdigest<span class="params">()</span>; print<span class="params">('Error validating download <span class="params">(got %s instead of %s)</span>, please try manual install' % <span class="params">(dh, h)</span>)</span> <span class="keyword">if</span> dh <span class="built_in">!</span>= h <span class="keyword">else</span> open<span class="params">(os.path.join<span class="params">( ipp, pf)</span>, 'wb' )</span>.write<span class="params">(by)</span></span><br></pre></td></tr></table></figure>
 <p>安装好后，按Shift+Cmd+P，输入install Package，回车，然后就可以看到很多的插件了，这里推荐几个我常用的：</p>
-<p><a href="http://docs.emmet.io/abbreviations/syntax/" target="_blank" rel="external">Emmet</a>是web开发人员的福音，可以很方便快捷的编写html/css代码；<br>Markdown Preview提供了markdown文件的预览； Vintage可以在sublime text上使用vim的快捷键，还有其他的插件可以自己找。</p>
+<ul>
+<li><a href="http://docs.emmet.io/abbreviations/syntax/" target="_blank" rel="external">Emmet</a>是web开发人员的福音，可以很方便快捷的编写html/css代码；</li>
+<li>Markdown Preview提供了markdown文件的预览； Vintage可以在sublime text上使用vim的快捷键，还有其他的插件可以自己找；</li>
+<li>git</li>
+<li>darkula主题，Idea IntellIj的主题，黑酷。</li>
+</ul>
+<p>如果要在命令行中使用，还需要执行以下命令：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl</span><br></pre></td></tr></table></figure></p>
+<p>用<code>subl --help</code>查看使用方式。</p>
 <h2 id="StackEdit"><a href="https://stackedit.io" target="_blank" rel="external">StackEdit</a></h2><p>在线的markdown编辑器，功能齐全，支持多种网络存储（dropbox/google drive/Github/Gist/Wordpress/Blogger等）.</p>
 <h2 id="JSFiddle"><a href="http://jsfiddle.net/" target="_blank" rel="external">JSFiddle</a></h2><p>在线的代码演示工具。类似的还有<a href="http://codepen.io/" target="_blank" rel="external">CodePen</a>.</p>
 <h2 id="Mou"><a href="http://mouapp.com/" target="_blank" rel="external">Mou</a></h2><p>Mac上的Markdown编辑器，国人作品，简洁实用。<br><img src="/images/mou.png" alt="Mou"></p>
 <h2 id="Source_Tree"><a href="https://itunes.apple.com/cn/app/sourcetree-git-hg/id411678673?mt=12" target="_blank" rel="external">Source Tree</a></h2><p>Mac上强大的git图形界面。<br><img src="/images/sourcetree.png" alt="Source Tree"></p>
-<h2 id="Hammerspoon"><a href="http://www.hammerspoon.org/" target="_blank" rel="external">Hammerspoon</a></h2><h2 id="Terminal">Terminal</h2><ul>
+<h2 id="Hammerspoon"><a href="http://www.hammerspoon.org/" target="_blank" rel="external">Hammerspoon</a></h2><p>引用官方文档：</p>
+<blockquote>
+<p><strong>What can it do for me?</strong><br>You can write Lua code that interacts with OS X APIs for applications, windows, mouse pointers, filesystem objects, audio devices, batteries, screens, low-level keyboard/mouse events, clipboards, location services, wifi, and more.</p>
+</blockquote>
+<p>可以扩展mac的快捷键、控制窗口大小、监控wifi、地理位置等。我的配置：<a href="https://github.com/Aaronlong31/hammerspoon-config" target="_blank" rel="external">https://github.com/Aaronlong31/hammerspoon-config</a></p>
+<h2 id="Near_Lock"><a href="http://www.nearlock.me/" target="_blank" rel="external">Near Lock</a></h2><p>Near Lock 可以配合 iPhone 实现自动解锁、上锁 Mac。Near Lock 的使用体验非常棒，你只需把 iPhone 带在身上就可以了，随时打开你的 Mac 都是解锁状态。而当你离开 Mac 又会自动上锁，炫酷的不行。</p>
+<h2 id="Terminal">Terminal</h2><p>系统自带的terminal基本满足需求，不过还要些许配置：</p>
+<ul>
 <li>选择主题为Pro，好看！</li>
 <li>可以闪动光标，不然容易找不到光标在哪；</li>
 <li>打开键盘tab，勾选<code>使用Option键作为Meta键</code>，这样就可以使用<code>alt + .</code>这样的操作了！</li>
