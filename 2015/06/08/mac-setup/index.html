@@ -21,7 +21,7 @@ Homebrew Cas">
 <meta property="og:image" content="http://hexo.zlong.org/images/byobu.png">
 <meta property="og:image" content="http://hexo.zlong.org/images/mou.png">
 <meta property="og:image" content="http://hexo.zlong.org/images/sourcetree.png">
-<meta property="og:updated_time" content="2015-06-08T16:45:42.000Z">
+<meta property="og:updated_time" content="2015-06-08T17:09:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac常用工具">
 <meta name="twitter:description" content="HomebrewMac下必备的软件安装工具，类似于Ubuntu下的apt-get。安装方式：
@@ -208,6 +208,7 @@ Homebrew Cas">
 <p>安装后，需要运行<code>brew update</code>和<code>brew doctor</code>。<br>使用方式：<code>brew install wget</code>.</p>
 <h2 id="Homebrew_Cask"><a href="http://caskroom.io/" target="_blank" rel="external">Homebrew Cask</a></h2><p>homebrew的扩展，可以安装有图形化界面的软件。安装很简单：<code>brew install caskroom/cask/brew-cask</code>。<br>用它安装软件也很简单，<code>brew cask install xxx</code>就好，介绍几个好用的：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># &#39044;&#35272;&#25554;&#20214;&#65292;&#21487;&#20197;&#22312;Finder&#20013;&#25353;&#31354;&#26684;&#30452;&#25509;&#39044;&#35272;&#25991;&#20214;&#10;brew cask install qlcolorcode&#10;brew cask install qlstephen&#10;brew cask install qlmarkdown&#10;brew cask install quicklook-json&#10;brew cask install qlprettypatch&#10;brew cask install quicklook-csv&#10;brew cask install betterzipql&#10;brew cask install webpquicklook&#10;brew cask install suspicious-package&#10;&#10;brew cask install gitbook&#10;brew cask install github&#10;brew cask install near-lock&#10;brew cask install dash&#10;brew cask install atom&#10;brew cask install caffeine&#10;brew cask install java&#10;brew cask install qq&#10;brew cask install flashlight&#10;brew cask install dropbox&#10;brew cask install google-chrome&#10;brew cask install sequel-pro&#10;brew cask install tunnelblick&#10;brew cask install hammerspoon&#10;brew cask install sogouinput&#10;brew cask install betterzipql&#10;brew cask install quicklook-json&#10;brew cask install qlimagesize&#10;brew cask install qlstephen&#10;brew cask install qlcolorcode&#10;brew cask install sourcetree</span><br></pre></td></tr></table></figure>
+<h2 id="the_silver_searcher">the_silver_searcher</h2><p>安装方式：<code>brew install the_silver_searcher</code>，文件内容搜索神器，谁用谁知道。</p>
 <h2 id="oh-my-zsh"><a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="external">oh-my-zsh</a></h2><p>zsh是命令行环境bash的一种替代选择，oh-my-zsh对zsh做了很多扩展，有很多插件和主题，比如git插件能直接显示当前的分支和状态，如下图：<br><img src="/images/zsh1.png" alt="zsh"><br>安装方式：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L <span class="string">http:</span><span class="comment">//install.ohmyz.sh | sh</span></span><br></pre></td></tr></table></figure></p>
 <p>安装好后重新打开命令行，就能看到效果了。<br>zsh的配置文件是<code>~/.zshrc</code>，可以在里面配置theme和plugin。</p>
 <h2 id="byobu"><a href="https://help.ubuntu.com/community/Byobu" target="_blank" rel="external">byobu</a></h2><p>by obu是Ubuntu自带的，类似于screen的终端控制工具，可以多tab，多窗口，比screen好用很多。在Mac下需要通过brew安装：<code>brew install byobu</code>，效果如下图：<br><img src="/images/byobu.png" alt="byobu"><br>F2是新建tab，F3/F4在不同tab间切换。</p>
@@ -253,6 +254,7 @@ Homebrew Cas">
 <li>可以闪动光标，不然容易找不到光标在哪；</li>
 <li>打开键盘tab，勾选<code>使用Option键作为Meta键</code>，这样就可以使用<code>alt + .</code>这样的操作了！</li>
 </ul>
+<h2 id="Java">Java</h2><p>JDK1.7及以上都可以到oracle的官网下载，JDK1.6需要到苹果的<a href="http://supportdownload.apple.com/download.info.apple.com/Apple_Support_Area/Apple_Software_Updates/Mac_OS_X/downloads/031-03190.20140529.Pp3r4/JavaForOSX2014-001.dmg" target="_blank" rel="external">官网</a>下载。<br>下载后配置JAVA_HOME，修改~/.profile，加入以下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># &#22914;&#26524;&#24819;&#25442;&#25104;JDK1.7&#23601;&#20889;1.7&#65292;&#21069;&#25552;&#26159;&#20320;&#35201;&#20808;&#23433;&#35013;&#65307;1.6&#21644;1.7&#30340;&#23433;&#35013;&#36335;&#24452;&#24456;&#19981;&#19968;&#26679;&#65292;&#36825;&#26679;&#20889;&#20999;&#25442;&#26102;&#23601;&#26041;&#20415;&#22810;&#20102;&#12290;&#10;export JAVA_HOME=`/usr/libexec/java_home -v 1.6`&#10;export PATH=$JAVA_HOME/bin:$PATH</span><br></pre></td></tr></table></figure></p>
 <p>还有其他的工具，以后慢慢补充。</p>
 
       
