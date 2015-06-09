@@ -96,7 +96,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/mac/" style="font-size: 20px;">mac</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+						<a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mac/" style="font-size: 20px;">mac</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a>
 					</div>
 				</section>
 				
@@ -150,6 +150,69 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-svn-use-git" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/09/svn-use-git/" class="article-date">
+  	<time datetime="2015-06-09T03:39:22.000Z" itemprop="datePublished">2015-06-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/09/svn-use-git/">使用Git作为svn的客户端</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>新公司基本都在用SVN做版本控制，但习惯了git的我，没法喜欢svn，并且公司svn根深蒂固，各个工具平台都和svn结合紧密，很难改用git，还好git够强大，居然能作为svn的客户端，本地操作都是使用git，push到svn服务器还是svn格式的，这样愉悦自己，不影响他人。<br>下面说下使用方式，具体文档在<a href="https://git-scm.com/book/en/v2/Git-and-Other-Systems-Git-as-a-Client" target="_blank" rel="external">https://git-scm.com/book/en/v2/Git-and-Other-Systems-Git-as-a-Client</a>。</p>
+<p>假设svn仓库地址为：<a href="http://xxx.xxx.com/svn/projecta" target="_blank" rel="external">http://xxx.xxx.com/svn/projecta</a> ，有trunk和branches/dev分支。</p>
+<h2 id="clone到本地">clone到本地</h2><p>使用<code>git svn clone http://xxx.xxx.com/svn/projecta -s</code>将svn的文件都clone到本地。其中<code>-s</code>表示使用svn的标准目录格式，就是<code>trunk</code>、<code>branches</code>和<code>tags</code>，如果不是这种格式，也可以使用<code>-T trunk -b branches -t tags</code>来单独指定。</p>
+<h2 id="本地操作">本地操作</h2><p>clone到本地后，本地只有一个master分支，对应svn的trunk，如果想切换到其他分支，要先将svn的分支拉出来，再checkout：<br><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch <span class="built_in">dev</span> remote/origin/<span class="built_in">dev</span></span><br><span class="line">git checkout <span class="built_in">dev</span></span><br></pre></td></tr></table></figure></p>
+<p>切换后就可以像普通的git仓库一样操作了，如<code>git add</code>、<code>git status</code>、<code>git commit</code>等。</p>
+<h2 id="提交到svn">提交到svn</h2><p><code>git commit</code>只是提交到本地，需要执行<code>git svn dcommit</code>push到svn服务器。</p>
+<h2 id="常用操作">常用操作</h2><ul>
+<li><code>git svn info</code>：同<code>svn info</code></li>
+<li><code>git svn branch bug1</code>：创建svn分支</li>
+<li></li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svn/">svn</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-mac-setup" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -177,10 +240,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="Homebrew"><a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="external">Homebrew</a></h2><p>Mac下必备的软件安装工具，类似于Ubuntu下的apt-get。安装方式：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -e &#34;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&#34;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby <span class="operator">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)</span>"</span></span><br></pre></td></tr></table></figure>
 <p>安装后，需要运行<code>brew update</code>和<code>brew doctor</code>。<br>使用方式：<code>brew install wget</code>.</p>
 <h2 id="Homebrew_Cask"><a href="http://caskroom.io/" target="_blank" rel="external">Homebrew Cask</a></h2><p>homebrew的扩展，可以安装有图形化界面的软件。安装很简单：<code>brew install caskroom/cask/brew-cask</code>。<br>用它安装软件也很简单，<code>brew cask install xxx</code>就好，介绍几个好用的：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># &#39044;&#35272;&#25554;&#20214;&#65292;&#21487;&#20197;&#22312;Finder&#20013;&#25353;&#31354;&#26684;&#30452;&#25509;&#39044;&#35272;&#25991;&#20214;&#10;brew cask install qlcolorcode&#10;brew cask install qlstephen&#10;brew cask install qlmarkdown&#10;brew cask install quicklook-json&#10;brew cask install qlprettypatch&#10;brew cask install quicklook-csv&#10;brew cask install betterzipql&#10;brew cask install webpquicklook&#10;brew cask install suspicious-package&#10;&#10;brew cask install gitbook&#10;brew cask install github&#10;brew cask install near-lock&#10;brew cask install dash&#10;brew cask install atom&#10;brew cask install caffeine&#10;brew cask install java&#10;brew cask install qq&#10;brew cask install flashlight&#10;brew cask install dropbox&#10;brew cask install google-chrome&#10;brew cask install sequel-pro&#10;brew cask install tunnelblick&#10;brew cask install hammerspoon&#10;brew cask install sogouinput&#10;brew cask install betterzipql&#10;brew cask install quicklook-json&#10;brew cask install qlimagesize&#10;brew cask install qlstephen&#10;brew cask install qlcolorcode&#10;brew cask install sourcetree</span><br></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"># 预览插件，可以在Finder中按空格直接预览文件</span><br><span class="line"><span class="keyword">brew </span>cask install qlcolorcode</span><br><span class="line"><span class="keyword">brew </span>cask install qlstephen</span><br><span class="line"><span class="keyword">brew </span>cask install qlmarkdown</span><br><span class="line"><span class="keyword">brew </span>cask install quicklook-json</span><br><span class="line"><span class="keyword">brew </span>cask install qlprettypatch</span><br><span class="line"><span class="keyword">brew </span>cask install quicklook-csv</span><br><span class="line"><span class="keyword">brew </span>cask install <span class="keyword">betterzipql</span><br><span class="line"></span><span class="keyword">brew </span>cask install webpquicklook</span><br><span class="line"><span class="keyword">brew </span>cask install suspicious-package</span><br><span class="line"></span><br><span class="line"><span class="keyword">brew </span>cask install gitbook</span><br><span class="line"><span class="keyword">brew </span>cask install github</span><br><span class="line"><span class="keyword">brew </span>cask install near-lock</span><br><span class="line"><span class="keyword">brew </span>cask install dash</span><br><span class="line"><span class="keyword">brew </span>cask install atom</span><br><span class="line"><span class="keyword">brew </span>cask install caffeine</span><br><span class="line"><span class="keyword">brew </span>cask install java</span><br><span class="line"><span class="keyword">brew </span>cask install qq</span><br><span class="line"><span class="keyword">brew </span>cask install flashlight</span><br><span class="line"><span class="keyword">brew </span>cask install dropbox</span><br><span class="line"><span class="keyword">brew </span>cask install google-chrome</span><br><span class="line"><span class="keyword">brew </span>cask install sequel-pro</span><br><span class="line"><span class="keyword">brew </span>cask install tunnelblick</span><br><span class="line"><span class="keyword">brew </span>cask install hammerspoon</span><br><span class="line"><span class="keyword">brew </span>cask install sogouinput</span><br><span class="line"><span class="keyword">brew </span>cask install <span class="keyword">betterzipql</span><br><span class="line"></span><span class="keyword">brew </span>cask install quicklook-json</span><br><span class="line"><span class="keyword">brew </span>cask install qlimagesize</span><br><span class="line"><span class="keyword">brew </span>cask install qlstephen</span><br><span class="line"><span class="keyword">brew </span>cask install qlcolorcode</span><br><span class="line"><span class="keyword">brew </span>cask install sourcetree</span><br></pre></td></tr></table></figure>
 <h2 id="the_silver_searcher">the_silver_searcher</h2><p>安装方式：<code>brew install the_silver_searcher</code>，文件内容搜索神器，谁用谁知道。</p>
 <h2 id="oh-my-zsh"><a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="external">oh-my-zsh</a></h2><p>zsh是命令行环境bash的一种替代选择，oh-my-zsh对zsh做了很多扩展，有很多插件和主题，比如git插件能直接显示当前的分支和状态，如下图：<br><img src="/images/zsh1.png" alt="zsh"><br>安装方式：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L <span class="string">http:</span><span class="comment">//install.ohmyz.sh | sh</span></span><br></pre></td></tr></table></figure></p>
 <p>安装好后重新打开命令行，就能看到效果了。<br>zsh的配置文件是<code>~/.zshrc</code>，可以在里面配置theme和plugin。</p>
@@ -209,7 +272,7 @@
 <li>git</li>
 <li>darkula主题，Idea IntellIj的主题，黑酷。</li>
 </ul>
-<p>如果要在命令行中使用，还需要执行以下命令：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl</span><br></pre></td></tr></table></figure></p>
+<p>如果要在命令行中使用，还需要执行以下命令：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s <span class="regexp">/Applications/</span>Sublime\ Text.app<span class="regexp">/Contents/</span>SharedSupport<span class="regexp">/bin/</span>subl <span class="regexp">/usr/</span>local<span class="regexp">/bin/</span>subl</span><br></pre></td></tr></table></figure></p>
 <p>用<code>subl --help</code>查看使用方式。</p>
 <h2 id="StackEdit"><a href="https://stackedit.io" target="_blank" rel="external">StackEdit</a></h2><p>在线的markdown编辑器，功能齐全，支持多种网络存储（dropbox/google drive/Github/Gist/Wordpress/Blogger等）.</p>
 <h2 id="JSFiddle"><a href="http://jsfiddle.net/" target="_blank" rel="external">JSFiddle</a></h2><p>在线的代码演示工具。类似的还有<a href="http://codepen.io/" target="_blank" rel="external">CodePen</a>.</p>
@@ -227,7 +290,7 @@
 <li>可以闪动光标，不然容易找不到光标在哪；</li>
 <li>打开键盘tab，勾选<code>使用Option键作为Meta键</code>，这样就可以使用<code>alt + .</code>这样的操作了！</li>
 </ul>
-<h2 id="Java">Java</h2><p>JDK1.7及以上都可以到oracle的官网下载，JDK1.6需要到苹果的<a href="http://supportdownload.apple.com/download.info.apple.com/Apple_Support_Area/Apple_Software_Updates/Mac_OS_X/downloads/031-03190.20140529.Pp3r4/JavaForOSX2014-001.dmg" target="_blank" rel="external">官网</a>下载。<br>下载后配置JAVA_HOME，修改~/.profile，加入以下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># &#22914;&#26524;&#24819;&#25442;&#25104;JDK1.7&#23601;&#20889;1.7&#65292;&#21069;&#25552;&#26159;&#20320;&#35201;&#20808;&#23433;&#35013;&#65307;1.6&#21644;1.7&#30340;&#23433;&#35013;&#36335;&#24452;&#24456;&#19981;&#19968;&#26679;&#65292;&#36825;&#26679;&#20889;&#20999;&#25442;&#26102;&#23601;&#26041;&#20415;&#22810;&#20102;&#12290;&#10;export JAVA_HOME=`/usr/libexec/java_home -v 1.6`&#10;export PATH=$JAVA_HOME/bin:$PATH</span><br></pre></td></tr></table></figure></p>
+<h2 id="Java">Java</h2><p>JDK1.7及以上都可以到oracle的官网下载，JDK1.6需要到苹果的<a href="http://supportdownload.apple.com/download.info.apple.com/Apple_Support_Area/Apple_Software_Updates/Mac_OS_X/downloads/031-03190.20140529.Pp3r4/JavaForOSX2014-001.dmg" target="_blank" rel="external">官网</a>下载。<br>下载后配置JAVA_HOME，修改~/.profile，加入以下代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果想换成JDK1.7就写1.7，前提是你要先安装；1.6和1.7的安装路径很不一样，这样写切换时就方便多了。</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=`/usr/libexec/java_home -v <span class="number">1.6</span>`</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure></p>
 <p>还有其他的工具，以后慢慢补充。</p>
 
       
@@ -289,21 +352,21 @@
 <p>这里先说说ssh的配置。</p>
 <h3 id="ssh的配置文件">ssh的配置文件</h3><p>ssh client有两个配置文件，<code>/etc/ssh/ssh_config</code>和<code>~/.ssh/config</code>，前者是对所有用户，后者是针对某个用户，两个文件的格式是一样的。</p>
 <h3 id="ssh配置文件的格式">ssh配置文件的格式</h3><p>每一行是一个配置项，如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">config value</span><br><span class="line">config value1 value2</span><br></pre></td></tr></table></figure>
+<figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">config <span class="keyword">value</span></span><br><span class="line">config <span class="keyword">value</span><span class="number">1</span> <span class="keyword">value</span><span class="number">2</span></span><br></pre></td></tr></table></figure>
 <p>也可以使用=号：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">config=value</span><br><span class="line">config=value1 value2</span><br></pre></td></tr></table></figure>
+<figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">config=<span class="keyword">value</span></span><br><span class="line">config=<span class="keyword">value</span><span class="number">1</span> <span class="keyword">value</span><span class="number">2</span></span><br></pre></td></tr></table></figure>
 <p>空行和以<code>#</code>开头的行会被忽略；<br>所有的值是区分大小写的，但参数名不区分。</p>
 <h3 id="示例">示例</h3><p>通常情况下使用ssh连接服务器使用如下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh username@server.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">ssh</span> username<span class="variable">@server</span>.com</span><br></pre></td></tr></table></figure>
 <p>这时会默认使用~/.ssh/id_rsa这个密钥，如果想使用不同的密钥则要：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -i path/to/id_rsa username@server.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -i path<span class="regexp">/to/</span>id_rsa username<span class="annotation">@server</span>.com</span><br></pre></td></tr></table></figure>
 <p>如果不想每次都指定这些密钥、用户名、服务器地址的话，可以在<code>~/.ssh/config</code>中配置，如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host server1</span><br><span class="line">	HostName server.com</span><br><span class="line">	User username</span><br><span class="line">	IdentifyFile path/to/id_rsa</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host server1</span><br><span class="line">	HostName server<span class="class">.com</span></span><br><span class="line">	User username</span><br><span class="line">	IdentifyFile path/to/id_rsa</span><br></pre></td></tr></table></figure>
 <p>这样就可以简单的使用以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh server1</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">ssh</span> server1</span><br></pre></td></tr></table></figure>
 <p>其实就相当于server1是个别名，可以任意取名。</p>
 <p>在来看看最开始提出的问题，有两个github账号，这时可以用ssh-keygen生成两个ssh密钥，~/.ssh/id&#95;rsa1和~/.ssh/id&#95;rsa2，~/.ssh/config，每个账号一个，配置如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Host github-user1</span><br><span class="line">	HostName github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~/.ssh/id_rsa1</span><br><span class="line"></span><br><span class="line">Host github-user2</span><br><span class="line">	HostName github.com</span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~/.ssh/id_rsa2</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Host github-user1</span><br><span class="line">	HostName github<span class="class">.com</span></span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~/.ssh/id_rsa1</span><br><span class="line"></span><br><span class="line">Host github-user2</span><br><span class="line">	HostName github<span class="class">.com</span></span><br><span class="line">	User git</span><br><span class="line">	IdentityFile ~/.ssh/id_rsa2</span><br></pre></td></tr></table></figure>
 <p>使用git clone时就用如下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> github-user1:user1/repo.git</span><br><span class="line">git <span class="built_in">clone</span> github-user2:user2/repo.git</span><br></pre></td></tr></table></figure>
 
@@ -363,10 +426,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="nodejs_配置">nodejs 配置</h1><p>使用淘宝的NPM镜像：<a href="https://npm.taobao.org/" target="_blank" rel="external">https://npm.taobao.org/</a></p>
-<h2 id="配置">配置</h2><h3 id="方式一：">方式一：</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<h3 id="方式二：">方式二：</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias cnpm=&#34;npm --registry=https://registry.npm.taobao.org \&#10;--cache=$HOME/.npm/.cache/cnpm \&#10;--disturl=https://npm.taobao.org/dist \&#10;--userconfig=$HOME/.cnpmrc&#34;</span><br></pre></td></tr></table></figure>
-<h2 id="安装npm模块">安装npm模块</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install [name]</span><br></pre></td></tr></table></figure>
-<h2 id="同步模块">同步模块</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm sync connect</span><br></pre></td></tr></table></figure>
+<h2 id="配置">配置</h2><h3 id="方式一：">方式一：</h3><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">npm</span> install -g cnpm --registry=<span class="attribute">https</span>:<span class="regexp">//</span>registry.<span class="built_in">npm</span>.taobao.org</span><br></pre></td></tr></table></figure>
+<h3 id="方式二：">方式二：</h3><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alias cnpm="npm --registry=https://registry.npm.taobao.org \</span><br><span class="line">-<span class="ruby">-cache=<span class="variable">$HOME</span>/.npm/.cache/cnpm \</span><br><span class="line"></span>-<span class="ruby">-disturl=<span class="symbol">https:</span>/<span class="regexp">/npm.taobao.org/dist</span> \</span><br><span class="line"></span>-<span class="ruby">-userconfig=<span class="variable">$HOME</span>/.cnpmrc<span class="string">"</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="安装npm模块">安装npm模块</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cnpm</span> install<span class="sqbracket"> [name]</span></span><br></pre></td></tr></table></figure>
+<h2 id="同步模块">同步模块</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">cnpm</span> sync connect</span><br></pre></td></tr></table></figure>
 
       
     </div>

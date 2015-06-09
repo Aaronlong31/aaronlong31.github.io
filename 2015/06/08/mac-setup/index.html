@@ -6,28 +6,28 @@
   <title>Mac常用工具 | 点点滴滴</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="HomebrewMac下必备的软件安装工具，类似于Ubuntu下的apt-get。安装方式：
-1ruby -e &amp;#34;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&amp;#34;
+1ruby -e &quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&quot;
 安装后，需要运行brew update和brew doctor。使用方式：brew install wget.
-Homebrew Cas">
+Homebrew Caskhomebre">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac常用工具">
 <meta property="og:url" content="http://hexo.zlong.org/2015/06/08/mac-setup/index.html">
 <meta property="og:site_name" content="点点滴滴">
 <meta property="og:description" content="HomebrewMac下必备的软件安装工具，类似于Ubuntu下的apt-get。安装方式：
-1ruby -e &amp;#34;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&amp;#34;
+1ruby -e &quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&quot;
 安装后，需要运行brew update和brew doctor。使用方式：brew install wget.
-Homebrew Cas">
+Homebrew Caskhomebre">
 <meta property="og:image" content="http://hexo.zlong.org/images/zsh1.png">
 <meta property="og:image" content="http://hexo.zlong.org/images/byobu.png">
 <meta property="og:image" content="http://hexo.zlong.org/images/mou.png">
 <meta property="og:image" content="http://hexo.zlong.org/images/sourcetree.png">
-<meta property="og:updated_time" content="2015-06-08T17:09:35.000Z">
+<meta property="og:updated_time" content="2015-06-09T04:39:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac常用工具">
 <meta name="twitter:description" content="HomebrewMac下必备的软件安装工具，类似于Ubuntu下的apt-get。安装方式：
-1ruby -e &amp;#34;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&amp;#34;
+1ruby -e &quot;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&quot;
 安装后，需要运行brew update和brew doctor。使用方式：brew install wget.
-Homebrew Cas">
+Homebrew Caskhomebre">
   
     <link rel="alternative" href="/atom.xml" title="点点滴滴" type="application/atom+xml">
   
@@ -110,7 +110,7 @@ Homebrew Cas">
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/mac/" style="font-size: 20px;">mac</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+						<a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mac/" style="font-size: 20px;">mac</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a>
 					</div>
 				</section>
 				
@@ -204,10 +204,10 @@ Homebrew Cas">
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="Homebrew"><a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="external">Homebrew</a></h2><p>Mac下必备的软件安装工具，类似于Ubuntu下的apt-get。安装方式：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -e &#34;$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)&#34;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby <span class="operator">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)</span>"</span></span><br></pre></td></tr></table></figure>
 <p>安装后，需要运行<code>brew update</code>和<code>brew doctor</code>。<br>使用方式：<code>brew install wget</code>.</p>
 <h2 id="Homebrew_Cask"><a href="http://caskroom.io/" target="_blank" rel="external">Homebrew Cask</a></h2><p>homebrew的扩展，可以安装有图形化界面的软件。安装很简单：<code>brew install caskroom/cask/brew-cask</code>。<br>用它安装软件也很简单，<code>brew cask install xxx</code>就好，介绍几个好用的：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># &#39044;&#35272;&#25554;&#20214;&#65292;&#21487;&#20197;&#22312;Finder&#20013;&#25353;&#31354;&#26684;&#30452;&#25509;&#39044;&#35272;&#25991;&#20214;&#10;brew cask install qlcolorcode&#10;brew cask install qlstephen&#10;brew cask install qlmarkdown&#10;brew cask install quicklook-json&#10;brew cask install qlprettypatch&#10;brew cask install quicklook-csv&#10;brew cask install betterzipql&#10;brew cask install webpquicklook&#10;brew cask install suspicious-package&#10;&#10;brew cask install gitbook&#10;brew cask install github&#10;brew cask install near-lock&#10;brew cask install dash&#10;brew cask install atom&#10;brew cask install caffeine&#10;brew cask install java&#10;brew cask install qq&#10;brew cask install flashlight&#10;brew cask install dropbox&#10;brew cask install google-chrome&#10;brew cask install sequel-pro&#10;brew cask install tunnelblick&#10;brew cask install hammerspoon&#10;brew cask install sogouinput&#10;brew cask install betterzipql&#10;brew cask install quicklook-json&#10;brew cask install qlimagesize&#10;brew cask install qlstephen&#10;brew cask install qlcolorcode&#10;brew cask install sourcetree</span><br></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"># 预览插件，可以在Finder中按空格直接预览文件</span><br><span class="line"><span class="keyword">brew </span>cask install qlcolorcode</span><br><span class="line"><span class="keyword">brew </span>cask install qlstephen</span><br><span class="line"><span class="keyword">brew </span>cask install qlmarkdown</span><br><span class="line"><span class="keyword">brew </span>cask install quicklook-json</span><br><span class="line"><span class="keyword">brew </span>cask install qlprettypatch</span><br><span class="line"><span class="keyword">brew </span>cask install quicklook-csv</span><br><span class="line"><span class="keyword">brew </span>cask install <span class="keyword">betterzipql</span><br><span class="line"></span><span class="keyword">brew </span>cask install webpquicklook</span><br><span class="line"><span class="keyword">brew </span>cask install suspicious-package</span><br><span class="line"></span><br><span class="line"><span class="keyword">brew </span>cask install gitbook</span><br><span class="line"><span class="keyword">brew </span>cask install github</span><br><span class="line"><span class="keyword">brew </span>cask install near-lock</span><br><span class="line"><span class="keyword">brew </span>cask install dash</span><br><span class="line"><span class="keyword">brew </span>cask install atom</span><br><span class="line"><span class="keyword">brew </span>cask install caffeine</span><br><span class="line"><span class="keyword">brew </span>cask install java</span><br><span class="line"><span class="keyword">brew </span>cask install qq</span><br><span class="line"><span class="keyword">brew </span>cask install flashlight</span><br><span class="line"><span class="keyword">brew </span>cask install dropbox</span><br><span class="line"><span class="keyword">brew </span>cask install google-chrome</span><br><span class="line"><span class="keyword">brew </span>cask install sequel-pro</span><br><span class="line"><span class="keyword">brew </span>cask install tunnelblick</span><br><span class="line"><span class="keyword">brew </span>cask install hammerspoon</span><br><span class="line"><span class="keyword">brew </span>cask install sogouinput</span><br><span class="line"><span class="keyword">brew </span>cask install <span class="keyword">betterzipql</span><br><span class="line"></span><span class="keyword">brew </span>cask install quicklook-json</span><br><span class="line"><span class="keyword">brew </span>cask install qlimagesize</span><br><span class="line"><span class="keyword">brew </span>cask install qlstephen</span><br><span class="line"><span class="keyword">brew </span>cask install qlcolorcode</span><br><span class="line"><span class="keyword">brew </span>cask install sourcetree</span><br></pre></td></tr></table></figure>
 <h2 id="the_silver_searcher">the_silver_searcher</h2><p>安装方式：<code>brew install the_silver_searcher</code>，文件内容搜索神器，谁用谁知道。</p>
 <h2 id="oh-my-zsh"><a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="external">oh-my-zsh</a></h2><p>zsh是命令行环境bash的一种替代选择，oh-my-zsh对zsh做了很多扩展，有很多插件和主题，比如git插件能直接显示当前的分支和状态，如下图：<br><img src="/images/zsh1.png" alt="zsh"><br>安装方式：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L <span class="string">http:</span><span class="comment">//install.ohmyz.sh | sh</span></span><br></pre></td></tr></table></figure></p>
 <p>安装好后重新打开命令行，就能看到效果了。<br>zsh的配置文件是<code>~/.zshrc</code>，可以在里面配置theme和plugin。</p>
@@ -236,7 +236,7 @@ Homebrew Cas">
 <li>git</li>
 <li>darkula主题，Idea IntellIj的主题，黑酷。</li>
 </ul>
-<p>如果要在命令行中使用，还需要执行以下命令：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl</span><br></pre></td></tr></table></figure></p>
+<p>如果要在命令行中使用，还需要执行以下命令：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s <span class="regexp">/Applications/</span>Sublime\ Text.app<span class="regexp">/Contents/</span>SharedSupport<span class="regexp">/bin/</span>subl <span class="regexp">/usr/</span>local<span class="regexp">/bin/</span>subl</span><br></pre></td></tr></table></figure></p>
 <p>用<code>subl --help</code>查看使用方式。</p>
 <h2 id="StackEdit"><a href="https://stackedit.io" target="_blank" rel="external">StackEdit</a></h2><p>在线的markdown编辑器，功能齐全，支持多种网络存储（dropbox/google drive/Github/Gist/Wordpress/Blogger等）.</p>
 <h2 id="JSFiddle"><a href="http://jsfiddle.net/" target="_blank" rel="external">JSFiddle</a></h2><p>在线的代码演示工具。类似的还有<a href="http://codepen.io/" target="_blank" rel="external">CodePen</a>.</p>
@@ -254,7 +254,7 @@ Homebrew Cas">
 <li>可以闪动光标，不然容易找不到光标在哪；</li>
 <li>打开键盘tab，勾选<code>使用Option键作为Meta键</code>，这样就可以使用<code>alt + .</code>这样的操作了！</li>
 </ul>
-<h2 id="Java">Java</h2><p>JDK1.7及以上都可以到oracle的官网下载，JDK1.6需要到苹果的<a href="http://supportdownload.apple.com/download.info.apple.com/Apple_Support_Area/Apple_Software_Updates/Mac_OS_X/downloads/031-03190.20140529.Pp3r4/JavaForOSX2014-001.dmg" target="_blank" rel="external">官网</a>下载。<br>下载后配置JAVA_HOME，修改~/.profile，加入以下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># &#22914;&#26524;&#24819;&#25442;&#25104;JDK1.7&#23601;&#20889;1.7&#65292;&#21069;&#25552;&#26159;&#20320;&#35201;&#20808;&#23433;&#35013;&#65307;1.6&#21644;1.7&#30340;&#23433;&#35013;&#36335;&#24452;&#24456;&#19981;&#19968;&#26679;&#65292;&#36825;&#26679;&#20889;&#20999;&#25442;&#26102;&#23601;&#26041;&#20415;&#22810;&#20102;&#12290;&#10;export JAVA_HOME=`/usr/libexec/java_home -v 1.6`&#10;export PATH=$JAVA_HOME/bin:$PATH</span><br></pre></td></tr></table></figure></p>
+<h2 id="Java">Java</h2><p>JDK1.7及以上都可以到oracle的官网下载，JDK1.6需要到苹果的<a href="http://supportdownload.apple.com/download.info.apple.com/Apple_Support_Area/Apple_Software_Updates/Mac_OS_X/downloads/031-03190.20140529.Pp3r4/JavaForOSX2014-001.dmg" target="_blank" rel="external">官网</a>下载。<br>下载后配置JAVA_HOME，修改~/.profile，加入以下代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果想换成JDK1.7就写1.7，前提是你要先安装；1.6和1.7的安装路径很不一样，这样写切换时就方便多了。</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=`/usr/libexec/java_home -v <span class="number">1.6</span>`</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure></p>
 <p>还有其他的工具，以后慢慢补充。</p>
 
       
@@ -264,6 +264,15 @@ Homebrew Cas">
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/06/09/svn-use-git/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          使用Git作为svn的客户端
+        
+      </div>
+    </a>
   
   
     <a href="/2015/06/08/ssh-config/" id="article-nav-older" class="article-nav-link-wrap">

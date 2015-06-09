@@ -3,24 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>nodejs的配置 | 点点滴滴</title>
+  <title>使用Git作为svn的客户端 | 点点滴滴</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="nodejs 配置使用淘宝的NPM镜像：https://npm.taobao.org/
-配置方式一：1npm install -g cnpm --registry=https://registry.npm.taobao.org
-方式二：1234alias cnpm=&quot;npm --registry=https://registry.npm.taobao.org \--cache=$HOME/.npm">
+  <meta name="description" content="新公司基本都在用SVN做版本控制，但习惯了git的我，没法喜欢svn，并且公司svn根深蒂固，各个工具平台都和svn结合紧密，很难改用git，还好git够强大，居然能作为svn的客户端，本地操作都是使用git，push到svn服务器还是svn格式的，这样愉悦自己，不影响他人。下面说下使用方式，具体文档在https://git-scm.com/book/en/v2/Git-and-Other-Sys">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nodejs的配置">
-<meta property="og:url" content="http://hexo.zlong.org/2015/06/08/nodejs-mac-setup/index.html">
+<meta property="og:title" content="使用Git作为svn的客户端">
+<meta property="og:url" content="http://hexo.zlong.org/2015/06/09/svn-use-git/index.html">
 <meta property="og:site_name" content="点点滴滴">
-<meta property="og:description" content="nodejs 配置使用淘宝的NPM镜像：https://npm.taobao.org/
-配置方式一：1npm install -g cnpm --registry=https://registry.npm.taobao.org
-方式二：1234alias cnpm=&quot;npm --registry=https://registry.npm.taobao.org \--cache=$HOME/.npm">
-<meta property="og:updated_time" content="2015-06-09T04:04:27.000Z">
+<meta property="og:description" content="新公司基本都在用SVN做版本控制，但习惯了git的我，没法喜欢svn，并且公司svn根深蒂固，各个工具平台都和svn结合紧密，很难改用git，还好git够强大，居然能作为svn的客户端，本地操作都是使用git，push到svn服务器还是svn格式的，这样愉悦自己，不影响他人。下面说下使用方式，具体文档在https://git-scm.com/book/en/v2/Git-and-Other-Sys">
+<meta property="og:updated_time" content="2015-06-09T04:03:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nodejs的配置">
-<meta name="twitter:description" content="nodejs 配置使用淘宝的NPM镜像：https://npm.taobao.org/
-配置方式一：1npm install -g cnpm --registry=https://registry.npm.taobao.org
-方式二：1234alias cnpm=&quot;npm --registry=https://registry.npm.taobao.org \--cache=$HOME/.npm">
+<meta name="twitter:title" content="使用Git作为svn的客户端">
+<meta name="twitter:description" content="新公司基本都在用SVN做版本控制，但习惯了git的我，没法喜欢svn，并且公司svn根深蒂固，各个工具平台都和svn结合紧密，很难改用git，还好git够强大，居然能作为svn的客户端，本地操作都是使用git，push到svn服务器还是svn格式的，这样愉悦自己，不影响他人。下面说下使用方式，具体文档在https://git-scm.com/book/en/v2/Git-and-Other-Sys">
   
     <link rel="alternative" href="/atom.xml" title="点点滴滴" type="application/atom+xml">
   
@@ -155,11 +149,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-nodejs-mac-setup" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-svn-use-git" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/06/08/nodejs-mac-setup/" class="article-date">
-  	<time datetime="2015-06-08T12:26:06.000Z" itemprop="datePublished">2015-06-08</time>
+      <a href="/2015/06/09/svn-use-git/" class="article-date">
+  	<time datetime="2015-06-09T03:39:22.000Z" itemprop="datePublished">2015-06-09</time>
 </a>
     </div>
   
@@ -172,7 +166,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      nodejs的配置
+      使用Git作为svn的客户端
     </h1>
   
 
@@ -181,14 +175,10 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svn/">svn</a></li></ul>
 	</div>
 
         
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/mac/">mac</a>
-	</div>
-
 
         <div class="clearfix"></div>
       </div>
@@ -196,11 +186,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="nodejs_配置">nodejs 配置</h1><p>使用淘宝的NPM镜像：<a href="https://npm.taobao.org/" target="_blank" rel="external">https://npm.taobao.org/</a></p>
-<h2 id="配置">配置</h2><h3 id="方式一：">方式一：</h3><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">npm</span> install -g cnpm --registry=<span class="attribute">https</span>:<span class="regexp">//</span>registry.<span class="built_in">npm</span>.taobao.org</span><br></pre></td></tr></table></figure>
-<h3 id="方式二：">方式二：</h3><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alias cnpm="npm --registry=https://registry.npm.taobao.org \</span><br><span class="line">-<span class="ruby">-cache=<span class="variable">$HOME</span>/.npm/.cache/cnpm \</span><br><span class="line"></span>-<span class="ruby">-disturl=<span class="symbol">https:</span>/<span class="regexp">/npm.taobao.org/dist</span> \</span><br><span class="line"></span>-<span class="ruby">-userconfig=<span class="variable">$HOME</span>/.cnpmrc<span class="string">"</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="安装npm模块">安装npm模块</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cnpm</span> install<span class="sqbracket"> [name]</span></span><br></pre></td></tr></table></figure>
-<h2 id="同步模块">同步模块</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">cnpm</span> sync connect</span><br></pre></td></tr></table></figure>
+        <p>新公司基本都在用SVN做版本控制，但习惯了git的我，没法喜欢svn，并且公司svn根深蒂固，各个工具平台都和svn结合紧密，很难改用git，还好git够强大，居然能作为svn的客户端，本地操作都是使用git，push到svn服务器还是svn格式的，这样愉悦自己，不影响他人。<br>下面说下使用方式，具体文档在<a href="https://git-scm.com/book/en/v2/Git-and-Other-Systems-Git-as-a-Client" target="_blank" rel="external">https://git-scm.com/book/en/v2/Git-and-Other-Systems-Git-as-a-Client</a>。</p>
+<p>假设svn仓库地址为：<a href="http://xxx.xxx.com/svn/projecta" target="_blank" rel="external">http://xxx.xxx.com/svn/projecta</a> ，有trunk和branches/dev分支。</p>
+<h2 id="clone到本地">clone到本地</h2><p>使用<code>git svn clone http://xxx.xxx.com/svn/projecta -s</code>将svn的文件都clone到本地。其中<code>-s</code>表示使用svn的标准目录格式，就是<code>trunk</code>、<code>branches</code>和<code>tags</code>，如果不是这种格式，也可以使用<code>-T trunk -b branches -t tags</code>来单独指定。</p>
+<h2 id="本地操作">本地操作</h2><p>clone到本地后，本地只有一个master分支，对应svn的trunk，如果想切换到其他分支，要先将svn的分支拉出来，再checkout：<br><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch <span class="built_in">dev</span> remote/origin/<span class="built_in">dev</span></span><br><span class="line">git checkout <span class="built_in">dev</span></span><br></pre></td></tr></table></figure></p>
+<p>切换后就可以像普通的git仓库一样操作了，如<code>git add</code>、<code>git status</code>、<code>git commit</code>等。</p>
+<h2 id="提交到svn">提交到svn</h2><p><code>git commit</code>只是提交到本地，需要执行<code>git svn dcommit</code>push到svn服务器。</p>
+<h2 id="常用操作">常用操作</h2><ul>
+<li><code>git svn info</code>：同<code>svn info</code></li>
+<li><code>git svn branch bug1</code>：创建svn分支</li>
+<li></li>
+</ul>
 
       
     </div>
@@ -210,18 +206,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/06/08/ssh-config/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          ssh-config配置
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/06/08/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2015/06/08/mac-setup/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mac常用工具</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
