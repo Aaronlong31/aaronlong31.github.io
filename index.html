@@ -96,7 +96,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mac/" style="font-size: 20px;">mac</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a>
+						<a href="/tags/Intellij-Idea/" style="font-size: 10px;">Intellij Idea</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mac/" style="font-size: 20px;">mac</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a>
 					</div>
 				</section>
 				
@@ -149,6 +149,59 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-idea-setup" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/16/idea-setup/" class="article-date">
+  	<time datetime="2015-06-16T11:16:41.000Z" itemprop="datePublished">2015-06-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/16/idea-setup/">Intellij Idea配置</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="user-dir设置">user.dir设置</h2><p>对于包含很多子项目的maven工程，在eclipse下运行单元测试时，user.dir为子项目的路径，但在Intellij Idea下是项目根目录路径，这时就可能出现eclipse找得到文件，在idea下找不到的情况。设置如下：<br>Run-&gt;Edit configurations-&gt;Defaults，选择测试工具，修改<code>Working directory</code>为<code>$MODULE_DIR$</code>。<br>以上是修改默认的测试，对于已有的测试，需要单独修改。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Intellij-Idea/">Intellij Idea</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-svn-use-git" class="article article-type-post" itemscope itemprop="blogPost">
   
