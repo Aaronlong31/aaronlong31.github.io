@@ -5,16 +5,16 @@
   
   <title>Intellij Idea配置 | 点点滴滴</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="user.dir设置对于包含很多子项目的maven工程，在eclipse下运行单元测试时，user.dir为子项目的路径，但在Intellij Idea下是项目根目录路径，这时就可能出现eclipse找得到文件，在idea下找不到的情况。设置如下：Run-&amp;gt;Edit configurations-&amp;gt;Defaults，选择测试工具，修改Working directory为$MODULE_">
+  <meta name="description" content="user.dir设置对于包含很多子项目的maven工程，在eclipse下运行单元测试时，user.dir为子项目的路径，但在Intellij Idea下是项目根目录路径，这时就可能出现eclipse找得到文件，在idea下找不到的情况。设置如下：Run-&amp;gt;Edit configurations-&amp;gt;Defaults，选择测试工具，比如TestNG或Junit，修改Working dir">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Intellij Idea配置">
 <meta property="og:url" content="http://hexo.zlong.org/2015/06/16/idea-setup/index.html">
 <meta property="og:site_name" content="点点滴滴">
-<meta property="og:description" content="user.dir设置对于包含很多子项目的maven工程，在eclipse下运行单元测试时，user.dir为子项目的路径，但在Intellij Idea下是项目根目录路径，这时就可能出现eclipse找得到文件，在idea下找不到的情况。设置如下：Run-&amp;gt;Edit configurations-&amp;gt;Defaults，选择测试工具，修改Working directory为$MODULE_">
-<meta property="og:updated_time" content="2015-06-16T11:27:14.000Z">
+<meta property="og:description" content="user.dir设置对于包含很多子项目的maven工程，在eclipse下运行单元测试时，user.dir为子项目的路径，但在Intellij Idea下是项目根目录路径，这时就可能出现eclipse找得到文件，在idea下找不到的情况。设置如下：Run-&amp;gt;Edit configurations-&amp;gt;Defaults，选择测试工具，比如TestNG或Junit，修改Working dir">
+<meta property="og:updated_time" content="2015-06-17T01:48:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Intellij Idea配置">
-<meta name="twitter:description" content="user.dir设置对于包含很多子项目的maven工程，在eclipse下运行单元测试时，user.dir为子项目的路径，但在Intellij Idea下是项目根目录路径，这时就可能出现eclipse找得到文件，在idea下找不到的情况。设置如下：Run-&amp;gt;Edit configurations-&amp;gt;Defaults，选择测试工具，修改Working directory为$MODULE_">
+<meta name="twitter:description" content="user.dir设置对于包含很多子项目的maven工程，在eclipse下运行单元测试时，user.dir为子项目的路径，但在Intellij Idea下是项目根目录路径，这时就可能出现eclipse找得到文件，在idea下找不到的情况。设置如下：Run-&amp;gt;Edit configurations-&amp;gt;Defaults，选择测试工具，比如TestNG或Junit，修改Working dir">
   
     <link rel="alternative" href="/atom.xml" title="点点滴滴" type="application/atom+xml">
   
@@ -186,7 +186,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="user-dir设置">user.dir设置</h2><p>对于包含很多子项目的maven工程，在eclipse下运行单元测试时，user.dir为子项目的路径，但在Intellij Idea下是项目根目录路径，这时就可能出现eclipse找得到文件，在idea下找不到的情况。设置如下：<br>Run-&gt;Edit configurations-&gt;Defaults，选择测试工具，修改<code>Working directory</code>为<code>$MODULE_DIR$</code>。<br>以上是修改默认的测试，对于已有的测试，需要单独修改。</p>
+        <h2 id="user-dir设置">user.dir设置</h2><p>对于包含很多子项目的maven工程，在eclipse下运行单元测试时，user.dir为子项目的路径，但在Intellij Idea下是项目根目录路径，这时就可能出现eclipse找得到文件，在idea下找不到的情况。设置如下：<br>Run-&gt;Edit configurations-&gt;Defaults，选择测试工具，比如TestNG或Junit，修改<code>Working directory</code>为<code>$MODULE_DIR$</code>。<br>以上是修改默认的测试，对于已有的测试，需要单独修改。</p>
 
       
     </div>
