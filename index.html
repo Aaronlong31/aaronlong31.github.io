@@ -96,7 +96,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Intellij-Idea/" style="font-size: 10px;">Intellij Idea</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mac/" style="font-size: 20px;">mac</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a>
+						<a href="/tags/Intellij-Idea/" style="font-size: 10px;">Intellij Idea</a> <a href="/tags/exif/" style="font-size: 10px;">exif</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mac/" style="font-size: 20px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a>
 					</div>
 				</section>
 				
@@ -149,6 +149,131 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-modify-exif" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/31/modify-exif/" class="article-date">
+  	<time datetime="2015-08-31T10:54:41.000Z" itemprop="datePublished">2015-08-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/31/modify-exif/">批量修改照片的EXIF信息</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天将相机中的照片都导入到Mac的Photos中，突然发现这些照片的拍照时间不对，年月日时分秒都不对。并且之前导入的照片都不对，肯定是相机的日期设置的不对。到相机上检查，果然是。那之前的照片也得全部修改了。</p>
+<h3 id="第一条路">第一条路</h3><p>打开Photos，选中照片，双击时间，会弹出修改时间的界面。但这样只能一个个的修改，不知改到何年何月，并且由于不知道照片的具体拍照时间，还只能自己估摸着改，很是不方便。</p>
+<h3 id="第二条路">第二条路</h3><p>一个个改不行，那就试着批量改。Google后发现可以用AppleScript脚本批量修改Photos中的照片信息，包括时间。但由于不知道拍照时间，还是只能改个大概。所幸的是，我居然找到一张照片，里面的显示器有电脑的系统时间，那这就好办了，知道了时间差，所有照片的拍照时间就能精确得到了。<br>照片的错误拍照时间是 2014-01-06 12:55，实际时间是2015-02-05 00:14，那时间差就是394天，11小时，19分，懒得算的可以用这个工具：<a href="http://www.timeanddate.com/date/durationresult.html?d1=06&amp;m1=1&amp;y1=2014&amp;d2=05&amp;m2=02&amp;y2=2015&amp;h1=12&amp;i1=55&amp;s1=00&amp;h2=00&amp;i2=14&amp;s2=00" target="_blank" rel="external">http://www.timeanddate.com/date/durationresult.html?d1=06&amp;m1=1&amp;y1=2014&amp;d2=05&amp;m2=02&amp;y2=2015&amp;h1=12&amp;i1=55&amp;s1=00&amp;h2=00&amp;i2=14&amp;s2=00</a></p>
+<p>AppleScript脚本如下：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">tell</span> <span class="type">application</span> <span class="string">"Photos"</span></span><br><span class="line">    <span class="command">activate</span></span><br><span class="line">    <span class="keyword">set</span> imageSel <span class="keyword">to</span> (<span class="keyword">get</span> selection)</span><br><span class="line">    <span class="keyword">set</span> imageCount <span class="keyword">to</span> (<span class="command">count</span> <span class="keyword">of</span> imageSel)</span><br><span class="line">    <span class="keyword">repeat</span> <span class="keyword">with</span> i <span class="keyword">from</span> <span class="number">1</span> <span class="keyword">to</span> imageCount</span><br><span class="line">        <span class="keyword">tell</span> media <span class="property">item</span> i</span><br><span class="line">            <span class="keyword">set</span> image <span class="keyword">to</span> <span class="property">item</span> i <span class="keyword">of</span> imageSel</span><br><span class="line">            <span class="keyword">set</span> image_date <span class="keyword">to</span> <span class="keyword">the</span> (<span class="type">date</span> <span class="keyword">of</span> image) + <span class="number">394</span> * days + <span class="number">11</span> * hours + <span class="number">19</span> * minutes</span><br><span class="line">            <span class="keyword">set</span> <span class="type">date</span> <span class="keyword">of</span> image <span class="keyword">to</span> image_date</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">tell</span></span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">repeat</span></span><br><span class="line"><span class="command">    return</span> <span class="string">"Modify image date successfully."</span></span><br><span class="line"><span class="keyword">end</span> <span class="keyword">tell</span></span><br></pre></td></tr></table></figure>
+<p>使用方式就是打开AppleScript编辑器，输入以上脚本，然后打开Photos，选择要修改的照片，再回到AppleScript编辑器，点运行就好啦！但我使用时发现，速度很慢，大概一秒钟改一两个，并且还不能一次选择很多照片（大概能选择30张左右），不然就报错。有可能是脚本问题，但不知道怎么改了。所以，换路。</p>
+<h3 id="第三条路">第三条路</h3><p>在Google的过程中，无意发现了<a href="http://www.sentex.net/~mwandel/jhead/" target="_blank" rel="external">jhead</a>这个软件，能修改EXIF信息。查看文档，使用很简单，并且支持多系统。</p>
+<p>先安装，在mac下可以通过<code>brew install jhead</code>来安装。Photos中的照片要先导出来，导出时要选择<code>导出未修改的原件</code>。导出后执行以下命令：</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jhead -da<span class="number">2015:02:05</span>/<span class="number">00:14-2014</span>:<span class="number">01:06/12:55</span> -ft *.JPG</span><br></pre></td></tr></table></figure>
+<p>这个工具异常的方便，-da参数是专门用来对付相机时间不对这个问题的。只要指定一个正确的拍照时间和不正确的拍照时间就好了，都不用你去算时间差，所有的照片都按这个时间差来修改。-ft是修改照片的修改时间为拍照时间，如果创建时间大于拍照时间，也会被修改成拍照时间。完成后导入到Photos就好了，当然，要先删除Photos中有问题的照片。</p>
+<blockquote>
+<p>总结：不能在一棵树上吊死，要多在几棵树上试试。</p>
+</blockquote>
+<p>All done!</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/exif/">exif</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-nginx-wordpress" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/06/nginx-wordpress/" class="article-date">
+  	<time datetime="2015-08-06T08:31:34.000Z" itemprop="datePublished">2015-08-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/06/nginx-wordpress/">使用Nginx作为wordpress的web服务器</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>服务器: Ubuntu 14.0<br>需要安装php5-fpm。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nginx&#10;sudo apt-get install php5-fpm</span><br></pre></td></tr></table></figure>
+<p>修改nginx配置，在/etc/nginx/sites-available/中增加文件www.xxx.com:<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">server</span> &#123;</span><br><span class="line">        <span class="title">listen</span>   <span class="number">80</span>;</span><br><span class="line">        <span class="title">root</span> /var/www/xxx;</span><br><span class="line">        <span class="title">index</span> index.php index.html index.htm;</span><br><span class="line">        <span class="title">server_name</span> www.xxx.com;</span><br><span class="line">        <span class="title">server_name</span> xxx.com;</span><br><span class="line">        <span class="title">location</span> / &#123;</span><br><span class="line">                <span class="title">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.php?q=<span class="variable">$uri</span>&amp;<span class="variable">$args</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title">error_page</span> <span class="number">404</span> /<span class="number">404</span>.html;</span><br><span class="line">        <span class="title">error_page</span> <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span> /50x.html;</span><br><span class="line">        <span class="title">location</span> = /50x.html &#123;</span><br><span class="line">              <span class="title">root</span> /usr/share/nginx/www;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title">location</span> <span class="regexp">~ \.php$</span> &#123;</span><br><span class="line">                <span class="title">try_files</span> <span class="variable">$uri</span> =<span class="number">404</span>;</span><br><span class="line">                <span class="title">fastcgi_pass</span> <span class="url">unix:/var/run/php5-fpm.sock</span>;</span><br><span class="line">                <span class="title">fastcgi_index</span> index.php;</span><br><span class="line">                <span class="title">include</span> fastcgi_params;</span><br><span class="line">         &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s <span class="regexp">/etc/</span>nginx<span class="regexp">/sites-available/</span>www.xxx.com <span class="regexp">/etc/</span>nginx<span class="regexp">/sites-enabled/</span></span><br></pre></td></tr></table></figure>
+<p>以上设置完成后就可以安装wordpress了，但过几分钟就不能访问了，报php5-fpm connection timeout，重启php5-fpm又好了，但还是过几分钟就不能访问。要做以下修改：</p>
+<p>修改/etc/php5/fpm/pool.d/www.conf，将request_terminate_timeout设置为30s。<br><figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">service</span> nginx <span class="literal">restart</span></span><br><span class="line"><span class="keyword">service</span> php5-fpm <span class="literal">restart</span></span><br></pre></td></tr></table></figure></p>
+<p>剩下的就是安装wordpress了，Google it!。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wordpress/">wordpress</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-idea-setup" class="article article-type-post" itemscope itemprop="blogPost">
   

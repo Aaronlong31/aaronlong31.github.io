@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>批量修改照片的EXIF信息 | 点点滴滴</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天将相机中的照片都导入到Mac的Photos中，突然发现这些照片的拍照时间不对，年月日时分秒都不对。并且之前导入的照片都不对，肯定是相机的日期设置的不对。到相机上检查，果然是。那之前的照片也得全部修改了。
+第一条路打开Photos，选中照片，双击时间，会弹出修改时间的界面。但这样只能一个个的修改，不知改到何年何月，并且由于不知道照片的具体拍照时间，还只能自己估摸着改，很是不方便。
+第二条路一个个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="批量修改照片的EXIF信息">
+<meta property="og:url" content="http://hexo.zlong.org/2015/08/31/modify-exif/index.html">
+<meta property="og:site_name" content="点点滴滴">
+<meta property="og:description" content="今天将相机中的照片都导入到Mac的Photos中，突然发现这些照片的拍照时间不对，年月日时分秒都不对。并且之前导入的照片都不对，肯定是相机的日期设置的不对。到相机上检查，果然是。那之前的照片也得全部修改了。
+第一条路打开Photos，选中照片，双击时间，会弹出修改时间的界面。但这样只能一个个的修改，不知改到何年何月，并且由于不知道照片的具体拍照时间，还只能自己估摸着改，很是不方便。
+第二条路一个个">
+<meta property="og:updated_time" content="2015-08-31T12:04:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="批量修改照片的EXIF信息">
+<meta name="twitter:description" content="今天将相机中的照片都导入到Mac的Photos中，突然发现这些照片的拍照时间不对，年月日时分秒都不对。并且之前导入的照片都不对，肯定是相机的日期设置的不对。到相机上检查，果然是。那之前的照片也得全部修改了。
+第一条路打开Photos，选中照片，双击时间，会弹出修改时间的界面。但这样只能一个个的修改，不知改到何年何月，并且由于不知道照片的具体拍照时间，还只能自己估摸着改，很是不方便。
+第二条路一个个">
+  
+    <link rel="alternative" href="/atom.xml" title="点点滴滴" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">zhang long</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Intellij-Idea/" style="font-size: 10px;">Intellij Idea</a> <a href="/tags/exif/" style="font-size: 10px;">exif</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/mac/" style="font-size: 20px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">初入阿里，深似海</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">zhang long</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">zhang long</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-modify-exif" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/31/modify-exif/" class="article-date">
+  	<time datetime="2015-08-31T10:54:41.000Z" itemprop="datePublished">2015-08-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      批量修改照片的EXIF信息
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/exif/">exif</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天将相机中的照片都导入到Mac的Photos中，突然发现这些照片的拍照时间不对，年月日时分秒都不对。并且之前导入的照片都不对，肯定是相机的日期设置的不对。到相机上检查，果然是。那之前的照片也得全部修改了。</p>
+<h3 id="第一条路">第一条路</h3><p>打开Photos，选中照片，双击时间，会弹出修改时间的界面。但这样只能一个个的修改，不知改到何年何月，并且由于不知道照片的具体拍照时间，还只能自己估摸着改，很是不方便。</p>
+<h3 id="第二条路">第二条路</h3><p>一个个改不行，那就试着批量改。Google后发现可以用AppleScript脚本批量修改Photos中的照片信息，包括时间。但由于不知道拍照时间，还是只能改个大概。所幸的是，我居然找到一张照片，里面的显示器有电脑的系统时间，那这就好办了，知道了时间差，所有照片的拍照时间就能精确得到了。<br>照片的错误拍照时间是 2014-01-06 12:55，实际时间是2015-02-05 00:14，那时间差就是394天，11小时，19分，懒得算的可以用这个工具：<a href="http://www.timeanddate.com/date/durationresult.html?d1=06&amp;m1=1&amp;y1=2014&amp;d2=05&amp;m2=02&amp;y2=2015&amp;h1=12&amp;i1=55&amp;s1=00&amp;h2=00&amp;i2=14&amp;s2=00" target="_blank" rel="external">http://www.timeanddate.com/date/durationresult.html?d1=06&amp;m1=1&amp;y1=2014&amp;d2=05&amp;m2=02&amp;y2=2015&amp;h1=12&amp;i1=55&amp;s1=00&amp;h2=00&amp;i2=14&amp;s2=00</a></p>
+<p>AppleScript脚本如下：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">tell</span> <span class="type">application</span> <span class="string">"Photos"</span></span><br><span class="line">    <span class="command">activate</span></span><br><span class="line">    <span class="keyword">set</span> imageSel <span class="keyword">to</span> (<span class="keyword">get</span> selection)</span><br><span class="line">    <span class="keyword">set</span> imageCount <span class="keyword">to</span> (<span class="command">count</span> <span class="keyword">of</span> imageSel)</span><br><span class="line">    <span class="keyword">repeat</span> <span class="keyword">with</span> i <span class="keyword">from</span> <span class="number">1</span> <span class="keyword">to</span> imageCount</span><br><span class="line">        <span class="keyword">tell</span> media <span class="property">item</span> i</span><br><span class="line">            <span class="keyword">set</span> image <span class="keyword">to</span> <span class="property">item</span> i <span class="keyword">of</span> imageSel</span><br><span class="line">            <span class="keyword">set</span> image_date <span class="keyword">to</span> <span class="keyword">the</span> (<span class="type">date</span> <span class="keyword">of</span> image) + <span class="number">394</span> * days + <span class="number">11</span> * hours + <span class="number">19</span> * minutes</span><br><span class="line">            <span class="keyword">set</span> <span class="type">date</span> <span class="keyword">of</span> image <span class="keyword">to</span> image_date</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">tell</span></span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">repeat</span></span><br><span class="line"><span class="command">    return</span> <span class="string">"Modify image date successfully."</span></span><br><span class="line"><span class="keyword">end</span> <span class="keyword">tell</span></span><br></pre></td></tr></table></figure>
+<p>使用方式就是打开AppleScript编辑器，输入以上脚本，然后打开Photos，选择要修改的照片，再回到AppleScript编辑器，点运行就好啦！但我使用时发现，速度很慢，大概一秒钟改一两个，并且还不能一次选择很多照片（大概能选择30张左右），不然就报错。有可能是脚本问题，但不知道怎么改了。所以，换路。</p>
+<h3 id="第三条路">第三条路</h3><p>在Google的过程中，无意发现了<a href="http://www.sentex.net/~mwandel/jhead/" target="_blank" rel="external">jhead</a>这个软件，能修改EXIF信息。查看文档，使用很简单，并且支持多系统。</p>
+<p>先安装，在mac下可以通过<code>brew install jhead</code>来安装。Photos中的照片要先导出来，导出时要选择<code>导出未修改的原件</code>。导出后执行以下命令：</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jhead -da<span class="number">2015:02:05</span>/<span class="number">00:14-2014</span>:<span class="number">01:06/12:55</span> -ft *.JPG</span><br></pre></td></tr></table></figure>
+<p>这个工具异常的方便，-da参数是专门用来对付相机时间不对这个问题的。只要指定一个正确的拍照时间和不正确的拍照时间就好了，都不用你去算时间差，所有的照片都按这个时间差来修改。-ft是修改照片的修改时间为拍照时间，如果创建时间大于拍照时间，也会被修改成拍照时间。完成后导入到Photos就好了，当然，要先删除Photos中有问题的照片。</p>
+<blockquote>
+<p>总结：不能在一棵树上吊死，要多在几棵树上试试。</p>
+</blockquote>
+<p>All done!</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/08/06/nginx-wordpress/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用Nginx作为wordpress的web服务器</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'zlong'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 zhang long
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
