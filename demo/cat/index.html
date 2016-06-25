@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="http://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/lodash.js/4.13.1/lodash.js"></script>
+    <script src="js/jquery.rotate.js" charset="utf-8"></script>
+    <style media="screen">
+        #bug_container {
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            position: fixed;
+        }
+        #bug_container img{
+            margin-left: -135px;
+            margin-top: -155px;
+        }
+    </style>
+</head>
+<body>
+    <div id="bug_container">
+        <img src="img/bug.jpg" alt="">
+    </div>
+</body>
+<script type="text/javascript">
+    $(function(){
+        var $bug = $('#bug_container');
+        move();
+        function move() {
+            var destX = _.random(0, $(window).width()-$bug.width());
+            var destY = _.random(0, $(window).height()-$bug.height());
+            var sourceX = $bug.css('left').replace('px', '');
+            var sourceY = $bug.css('top').replace('px', '');
+            var rotate = (500-calculateRotate(sourceX, sourceY, destX, destY))%360;
+            var dis = distance(sourceX, sourceY, destX, destY);
+            var maxDistance = distance(0, 0, $(window).width(), $(window).height());
+            var duration = 1500*dis/maxDistance;
+            $bug.animate({rotate: rotate}, 500);
+
+            $bug.animate({
+                left: destX,
+                top: destY
+            }, duration, move);
+        }
+
+
+    });
+    function distance(x1, y1, x2, y2) {
+        var x = Math.abs(x1-x2);
+        var y = Math.abs(y1-y2);
+        return Math.sqrt(x*x+y*y);
+    }
+    function calculateRotate(x1, y1, x2, y2) {
+        var x = Math.abs(x1-x2);
+        var y = Math.abs(y1-y2);
+        var z = Math.sqrt(x*x+y*y);
+        var rotat = Math.round((Math.asin(y/z)/Math.PI*180));
+
+        // 第一象限
+        if (x2 >= x1 && y2 <= y1) {
+            rotat = rotat;
+        }
+        // 第二象限
+        else if (x2 <= x1 && y2 <= y1) {
+            rotat = 180 - rotat;
+        }
+        // 第三象限
+        else if (x2 <= x1 && y2 >= y1) {
+            rotat = 180 + rotat;
+        }
+        // 第四象限
+        else if(x2 >= x1 && y2 >= y1){
+            rotat = 360 - rotat;
+        }
+        return rotat; //真实的角度
+    }
+</script>
+</html>
