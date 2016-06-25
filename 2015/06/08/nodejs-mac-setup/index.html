@@ -27,7 +27,7 @@
   
     <link rel="icon" href="/favicon.png">
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
 </head>
 <body>
@@ -197,10 +197,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="nodejs_配置">nodejs 配置</h1><p>使用淘宝的NPM镜像：<a href="https://npm.taobao.org/" target="_blank" rel="external">https://npm.taobao.org/</a></p>
-<h2 id="配置">配置</h2><h3 id="方式一：">方式一：</h3><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">npm</span> install -g cnpm --registry=<span class="attribute">https</span>:<span class="regexp">//</span>registry.<span class="built_in">npm</span>.taobao.org</span><br></pre></td></tr></table></figure>
-<h3 id="方式二：">方式二：</h3><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alias cnpm="npm --registry=https://registry.npm.taobao.org \</span><br><span class="line">-<span class="ruby">-cache=<span class="variable">$HOME</span>/.npm/.cache/cnpm \</span><br><span class="line"></span>-<span class="ruby">-disturl=<span class="symbol">https:</span>/<span class="regexp">/npm.taobao.org/dist</span> \</span><br><span class="line"></span>-<span class="ruby">-userconfig=<span class="variable">$HOME</span>/.cnpmrc<span class="string">"</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="安装npm模块">安装npm模块</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cnpm</span> install<span class="sqbracket"> [name]</span></span><br></pre></td></tr></table></figure>
-<h2 id="同步模块">同步模块</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">cnpm</span> sync connect</span><br></pre></td></tr></table></figure>
+<h2 id="配置">配置</h2><h3 id="方式一：">方式一：</h3><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">npm</span> install -g cnpm --registry=https:<span class="regexp">//</span>registry.<span class="built_in">npm</span>.taobao.org</span><br></pre></td></tr></table></figure>
+<h3 id="方式二：">方式二：</h3><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alias cnpm="npm --registry=https://registry.npm.taobao.org \</span><br><span class="line">-<span class="ruby">-cache=$HOME/.npm/.cache/cnpm \</span><br><span class="line"></span>-<span class="ruby">-disturl=<span class="symbol">https:</span>/<span class="regexp">/npm.taobao.org/dist</span> \</span><br><span class="line"></span>-<span class="ruby">-userconfig=$HOME/.cnpmrc<span class="string">"</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="安装npm模块">安装npm模块</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm <span class="keyword">install</span> [<span class="keyword">name</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="同步模块">同步模块</h2><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm sync <span class="built_in">connect</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -265,12 +265,12 @@
 </footer>
     </div>
     
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<script src="/js/mobile.js" type="text/javascript"></script>
-<script src="/js/main.js" type="text/javascript"></script>
+<script src="/js/mobile.js"></script>
+<script src="/js/main.js"></script>
 
 
 
