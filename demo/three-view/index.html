@@ -22,6 +22,7 @@
     </head>
     <body>
         <a href="setup.html" target="_blank">Build  your own three-views!</a>
+        <button onclick="toLeft()">I</button>
         <script>
         var view2ds, vectorInXY, vectorInXZ, vectorInYZ, vector2ds, cubes = [], neededVectors, uniqueVectors, vector3Ds = [];
         var theta = 0;
@@ -275,6 +276,10 @@
         };
         render();
         acceptFullscreen();
+        function toLeft() {
+            targetYRotation = 90;
+            targetXRotation = 90;
+        }
         </script>   
     </body>
 </html>
