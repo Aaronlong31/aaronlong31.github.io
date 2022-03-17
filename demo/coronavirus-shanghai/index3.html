@@ -24,7 +24,7 @@
         }
 
         .amap-info-window {
-            width: 180px;
+            width: 150px;
             background: #fff;
             border-radius: 3px;
             padding: 3px 7px;
@@ -34,17 +34,13 @@
 
         .amap-info-sharp {
             position: absolute;
-            /* top: 41px; */
-            bottom: -8px;
+            top: 21px;
+            bottom: 0;
             left: 50%;
             margin-left: -8px;
             border-left: 8px solid transparent;
             border-right: 8px solid transparent;
             border-top: 8px solid #fff;
-        }
-        span.red {
-            color: red;
-            font-weight: bold;
         }
     </style>
 </head>
@@ -58,10 +54,10 @@
             <button class="btn" onclick="heatmap.hide()">关闭热力图</button>
         </div>
         <div class="input-item">
-            <input type="checkbox" id="showLayer" name="showLayer" checked="checked" onchange="change()" /> 显示区域信息<br>
+            是否显示分区图层：<input type="checkbox" id="showLayer" name="showLayer" checked="checked" onchange="change()" /><br>
         </div>
         <div class="input-item">
-            <input type="checkbox" id="showMarker" name="showMarker" checked="checked" onchange="change()" /> 显示标记<br>
+            是否显示标记：<input type="checkbox" id="showMarker" name="showMarker" checked="checked" onchange="change()" /><br>
         </div>
         <h4>选择性别</h4>
         <div class="input-item">
@@ -102,42 +98,8 @@
             count++;
             max = max > count ? max : count;
             qucount[qu] = count;
-            d.lng = qull[d.address][0];
-            d.lat = qull[d.address][1];
+            d.location = qull[d.address][0] + "," + qull[d.address][1];
         });
-
-        function groupByAddress(cases) {
-            var casesGroupByAddressTmp = {};
-            var casesGroupByAddress = [];
-            cases = cases.sort((a,b) => {return a.day - b.day});
-            cases.forEach(d => {
-                var t = casesGroupByAddressTmp[d.address] || {
-                    address: d.address,
-                    cases: [],
-                    type: "无症状感染",
-                    count: 0,
-                    lng: d.lng,
-                    lat: d.lat,
-                    content: "<b>" + d.address + "</b>"
-                };
-                t.cases.push(d);
-                t.type = d.type == "确诊"?"确诊":t.type;
-                t.content += "<br><span class="+( d.type == "确诊"?"red":"black")+">" + d.day + "日 " + d.type + " " + d.sex + " " + d.age + "岁 </span>";
-                t.count += d.type == "确诊"?20:10;
-                casesGroupByAddressTmp[d.address] = t;
-            });
-
-            for (address in casesGroupByAddressTmp) {
-                casesGroupByAddress.push(casesGroupByAddressTmp[address]);
-            }
-
-            return casesGroupByAddress;
-
-
-        }
-
-
-
         var map = new AMap.Map('container', {
             center: [121.485874, 31.142752],
             viewMode: '2D',
@@ -165,7 +127,7 @@
         var iconr = {
             type: 'image',
             image: 'r.png',
-            size: [20, 20],
+            size: [18, 18],
             anchor: 'bottom-center',
             angel: 0,
             retina: true
@@ -204,25 +166,21 @@
         }
 
         function refresh(cases) {
-
-            var casesGroupByAddress = groupByAddress(cases);
             map.clearMap();
             colors = {};
-            heatmap.setDataSet({data:[]});
             if (disProvince) {
                 disProvince.setMap(null)
             }
             if (document.getElementById("showMarker").checked) {
-                casesGroupByAddress.forEach(ca => {
-                    geoCode(ca);
+                cases.forEach(d => {
+                    geoCode(d);
                 });
             }
 
             if (document.getElementById("showLayer").checked) {
-                refreshCount(casesGroupByAddress);
                 initPro();
             }
-            groupAddressCount(casesGroupByAddress);
+            groupAddressCount(cases);
         }
 
         function refreshCount(cases) {
@@ -300,8 +258,7 @@
             var extData = e.target.getExtData();
             normalMarker.setContent(
                 '<div class="amap-info-window">'
-                    + extData.content +
-                // + extData.day + "日<br>" + extData.type + "<br>" + extData.sex + "<br>" + extData.address +
+                + extData.day + "日<br>" + extData.type + "<br>" + extData.sex + "<br>" + extData.address +
                 '<div class="amap-info-sharp"></div>' +
                 '</div>');
             normalMarker.setPosition(e.data.data.position);
@@ -327,18 +284,37 @@
             disProvince.setMap(map);
         }
 
-        function getColorByAdcode(adcode, name) {
+        function getColorByAdcode (adcode, name) {
             if (!colors[adcode]) {
                 var gb = 255 - Math.floor((qucount[name] || 0) / max * 255);
-                colors[adcode] = 'rgba(255, ' + gb + ',' + gb + ',0.7)';
+                colors[adcode] = 'rgba(255, ' + gb + ',' + gb + ',0.4)';
             }
 
             return colors[adcode];
         };
 
         function groupAddressCount(cases) {
+            var heatmapData = [];
+            var temp = {};
+            var max = 0;
+            cases.forEach(d => {
+                var count = temp[d.location] || 0;
+
+                count += d.type == "确诊" ? 20 : 10;
+                max = max > count ? max : count;
+                temp[d.location] = count;
+            });
+            for (k in temp) {
+                var location = k.split(",");
+                heatmapData.push({
+                    lng: location[0],
+                    lat: location[1],
+                    count: temp[k]
+                });
+            };
             heatmap.setDataSet({
-                data: cases
+                data: heatmapData,
+                max: max
             });
         }
 
