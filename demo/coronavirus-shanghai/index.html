@@ -42,6 +42,7 @@
             border-right: 8px solid transparent;
             border-top: 8px solid #fff;
         }
+
         span.red {
             color: red;
             font-weight: bold;
@@ -52,32 +53,36 @@
 <body>
     <div id="container"></div>
     <div class="input-card" style="width:24rem;">
-        <h3>上海疫情数据：3.06 - 3.16</h3>
-        <div class="input-item">
-            <button class="btn" onclick="heatmap.show()">显示热力图</button>
-            <button class="btn" onclick="heatmap.hide()">关闭热力图</button>
-        </div>
-        <div class="input-item">
-            <input type="checkbox" id="showLayer" name="showLayer" checked="checked" onchange="change()" /> 显示区域信息<br>
-        </div>
-        <div class="input-item">
-            <input type="checkbox" id="showMarker" name="showMarker" checked="checked" onchange="change()" /> 显示标记<br>
-        </div>
-        <h4>选择性别</h4>
-        <div class="input-item">
-            <select id="sex" onchange="change()">
-                <option value="">全部</option>
-                <option value="男">男</option>
-                <option value="女">女</option>
-            </select>
-        </div>
-        <h4>选择类型</h4>
-        <div class="input-item" style="margin-right:1rem;">
-            <select id="type" onchange="change()">
-                <option value="">全部</option>
-                <option value="确诊"">确诊</option>
-                <option value="无症状感染">无症状感染</option>
-            </select>
+        <h3 onclick="toggleControl()">上海疫情数据：3.06 - 3.16 (点击开关)</h3>
+        <div id="control">
+            <div class="input-item">
+                <button class="btn" onclick="heatmap.show()">显示热力图</button>
+                <button class="btn" onclick="heatmap.hide()">关闭热力图</button>
+            </div>
+            <div class="input-item">
+                <input type="checkbox" id="showLayer" name="showLayer" checked="checked" onchange="change()" />
+                显示区域信息<br>
+            </div>
+            <div class="input-item">
+                <input type="checkbox" id="showMarker" name="showMarker" checked="checked" onchange="change()" />
+                显示标记<br>
+            </div>
+            <h4>选择性别</h4>
+            <div class="input-item">
+                <select id="sex" onchange="change()">
+                    <option value="">全部</option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
+            <h4>选择类型</h4>
+            <div class="input-item" style="margin-right:1rem;">
+                <select id="type" onchange="change()">
+                    <option value="">全部</option>
+                    <option value="确诊"">确诊</option>
+                <option value=" 无症状感染">无症状感染</option>
+                </select>
+            </div>
         </div>
     </div>
 
@@ -109,7 +114,7 @@
         function groupByAddress(cases) {
             var casesGroupByAddressTmp = {};
             var casesGroupByAddress = [];
-            cases = cases.sort((a,b) => {return a.day - b.day});
+            cases = cases.sort((a, b) => { return a.day - b.day });
             cases.forEach(d => {
                 var t = casesGroupByAddressTmp[d.address] || {
                     address: d.address,
@@ -121,9 +126,9 @@
                     content: "<b>" + d.address + "</b>"
                 };
                 t.cases.push(d);
-                t.type = d.type == "确诊"?"确诊":t.type;
-                t.content += "<br><span class="+( d.type == "确诊"?"red":"black")+">" + d.day + "日 " + d.type + " " + d.sex + " " + d.age + "岁 </span>";
-                t.count += d.type == "确诊"?20:10;
+                t.type = d.type == "确诊" ? "确诊" : t.type;
+                t.content += "<br><span class=" + (d.type == "确诊" ? "red" : "black") + ">" + d.day + "日 " + d.type + " " + d.sex + " " + d.age + "岁 </span>";
+                t.count += d.type == "确诊" ? 20 : 10;
                 casesGroupByAddressTmp[d.address] = t;
             });
 
@@ -208,7 +213,7 @@
             var casesGroupByAddress = groupByAddress(cases);
             map.clearMap();
             colors = {};
-            heatmap.setDataSet({data:[]});
+            heatmap.setDataSet({ data: [] });
             if (disProvince) {
                 disProvince.setMap(null)
             }
@@ -300,7 +305,7 @@
             var extData = e.target.getExtData();
             normalMarker.setContent(
                 '<div class="amap-info-window">'
-                    + extData.content +
+                + extData.content +
                 // + extData.day + "日<br>" + extData.type + "<br>" + extData.sex + "<br>" + extData.address +
                 '<div class="amap-info-sharp"></div>' +
                 '</div>');
@@ -351,6 +356,16 @@
             refresh(data);
         });
 
+
+        var show = true;
+        function toggleControl() {
+            if (show) {
+                document.getElementById("control").style.display = 'none';;
+            } else {
+                document.getElementById("control").style.display = 'block';;
+            }
+            show = !show;
+        }
 
     </script>
 </body>
