@@ -1,0 +1,290 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>设置地图当前行政区</title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+    <style>
+        html,
+        body,
+        #container {
+            width: 100%;
+            height: 100%;
+        }
+
+        html,
+        body,
+        #container {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+
+        .amap-info-window {
+            width: 150px;
+            background: #fff;
+            border-radius: 3px;
+            padding: 3px 7px;
+            box-shadow: 0 2px 6px 0 rgba(114, 124, 245, .5);
+            position: relative;
+        }
+
+        .amap-info-sharp {
+            position: absolute;
+            top: 21px;
+            bottom: 0;
+            left: 50%;
+            margin-left: -8px;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+    <div class="input-card" style="width:24rem;">
+        <div class="input-item">
+            是否显示分区图层：<input type="checkbox" id="showLayer" name="showLayer" checked="checked" onchange="change()" /><br>
+        </div>
+        <div class="input-item">
+            是否显示标记：<input type="checkbox" id="showMarker" name="showMarker"  checked="checked" onchange="change()" /><br>
+        </div>
+        <h4>选择性别</h4>
+        <div class="input-item">
+            <select id="sex" onchange="change()">
+                <option value="">全部</option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+        </div>
+        <h4>选择类型</h4>
+        <div class="input-item" style="margin-right:1rem;">
+            <select id="type" onchange="change()">
+                <option value="">全部</option>
+                <option value="确诊"">确诊</option>
+                <option value=" 无症状感染">无症状感染</option>
+            </select>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        window._AMapSecurityConfig = {
+            securityJsCode: '8aae7da41f2cd76674e10a7b54ced2f9',
+        }
+    </script>
+    <script type="text/javascript" src='https://a.amap.com/jsapi_demos/static/resource/capitals.js'></script>
+    <script src="https://webapi.amap.com/maps?v=2.0&key=d47c602cf4d4f853784048010297fffa&plugin=AMap.Geocoder"></script>
+    <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+    <script src="data.js"></script>
+    <script src="data2.js"></script>
+    <script>
+        var qucount = {};
+        var max = 0;
+        var sex = "";
+        var type = "";
+        data.forEach(d => {
+            var qu = d.address.split("区")[0] + "区";
+            var count = qucount[qu] || 0;
+            count++;
+            max = max > count ? max : count;
+            qucount[qu] = count;
+        });
+        var map = new AMap.Map('container', {
+            center: [121.485874, 31.142752],
+            viewMode: '2D',
+            zoom: 10
+        });
+
+        // 创建 AMap.LabelsLayer 图层
+        var layer = new AMap.LabelsLayer({
+            zooms: [3, 20],
+            zIndex: 111,
+            // 关闭标注避让，默认为开启，v1.4.15 新增属性
+            animation: false,
+            // 关闭标注淡入动画，默认为开启，v1.4.15 新增属性
+            collision: false
+        });
+        map.add(layer);
+
+        var geocoder = new AMap.Geocoder({
+            city: "021", //城市设为北京，默认：“全国”
+        });
+
+        function change() {
+            var type = document.getElementById("type").value;
+            var result = data;
+            if (type != "") {
+                result = result.filter(e => {
+                    return e.type == type;
+                });
+            }
+            var sex = document.getElementById("sex").value;
+            if (sex != "") {
+                result = result.filter(e => {
+                    return e.sex == sex;
+                });
+            }
+            refresh(result);
+
+        }
+
+
+
+        function refresh(cases) {
+            map.clearMap();
+            colors = {};
+            if (disProvince) {
+                disProvince.setMap(null)
+            }
+            if (document.getElementById("showMarker").checked) {
+                cases.forEach(d => {
+                    geoCode(d);
+                });
+            }
+
+            if (document.getElementById("showLayer").checked) {
+                initPro();
+            }
+        }
+
+        function refreshCount(cases) {
+            qucount = {};
+            cases.forEach(d => {
+                var qu = d.address.split("区")[0] + "区";
+                var count = qucount[qu] || 0;
+                count++;
+                max = max > count ? max : count;
+                qucount[qu] = count;
+            });
+        }
+
+        function geoCode(ca) {
+            var address = ca.address;
+            var ll = qull[address];
+            if (ll) {
+                marker(ll, ca);
+                return;
+            }
+            console.log("query location: " + address);
+            geocoder.getLocation(address, function (status, result) {
+
+                if (status === 'complete' && result.geocodes.length) {
+                    var lnglat = result.geocodes[0].location;
+                    qull[address] = [lnglat.lng, lnglat.lat];
+                    marker(qull[address], ca);
+                } else {
+                    console.error('根据地址查询位置失败', status, result);
+                }
+            });
+        }
+
+        // 普通点
+        var normalMarker = new AMap.Marker({
+            offset: new AMap.Pixel(0, -20),
+        });
+        var iconb = {
+            type: 'image',
+            //image: 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
+            image: 'y.png',
+            size: [12, 12],
+            anchor: 'bottom-center',
+            angel: 0,
+            retina: true
+        };
+        var iconr = {
+            type: 'image',
+            image: 'r.png',
+            size: [18, 18],
+            anchor: 'bottom-center',
+            angel: 0,
+            retina: true
+        };
+        function marker(lnglat, ca) {
+            var type = ca.type;
+            // var marker = new AMap.Marker();
+            // var circleMarker = new AMap.CircleMarker({
+            //     center: [lnglat[0], lnglat[1]],
+            //     radius: 5,
+            //     strokeColor: type == "无症状感染" ? 'white' : "black",
+            //     strokeWeight: 1,
+            //     strokeOpacity: 0.5,
+            //     fillColor: type == "无症状感染" ? 'rgb(41, 128, 185)' : 'rgb(44, 62, 80)',
+            //     fillOpacity: 1,
+            //     zIndex: 10,
+            //     bubble: true,
+            //     cursor: 'pointer',
+            //     clickable: true
+            // })
+            // circleMarker.setMap(map);
+
+            // var curData = {
+            //     address: ca.address,
+            //     position: lnglat
+            // };
+
+            var curData = {
+                position: lnglat,
+                icon: type == "确诊" ? iconr : iconb,
+                zIndex: type == "确诊" ? 2 : 1,
+            };
+            var labelMarker = new AMap.LabelMarker(curData);
+            // 事件
+            labelMarker.setExtData(ca);
+            labelMarker.on('mouseover', function (e) {
+                var extData = e.target.getExtData();
+                normalMarker.setContent(
+                    '<div class="amap-info-window">'
+                    + extData.day + "日<br>" + extData.type + "<br>" + extData.sex + "<br>" + extData.address +
+                    '<div class="amap-info-sharp"></div>' +
+                    '</div>');
+                normalMarker.setPosition(e.data.data.position);
+                map.add(normalMarker);
+            });
+
+            labelMarker.on('mouseout', function () {
+                map.remove(normalMarker);
+            });
+            layer.add(labelMarker);
+        }
+
+        refresh(data);
+        var disProvince;
+        function initPro() {
+            disProvince = new AMap.DistrictLayer.Province({
+                zIndex: 12,
+                adcode: ["310000"],
+                depth: 2,
+                styles: {
+                    'fill': function (properties) {
+                        var adcode = properties.adcode;
+                        return getColorByAdcode(adcode, properties.NAME_CHN);
+                    },
+                    'province-stroke': 'cornflowerblue',
+                    'city-stroke': 'white', // 中国地级市边界
+                    'county-stroke': 'rgba(255,255,255,0.5)' // 中国区县边界
+                }
+            });
+
+            disProvince.setMap(map);
+        }
+
+        // 颜色辅助方法
+        var colors = {};
+        var getColorByAdcode = function (adcode, name) {
+            if (!colors[adcode]) {
+                var gb = 255 - Math.floor((qucount[name] || 0) / max * 255);
+                colors[adcode] = 'rgba(255, ' + gb + ',' + gb + ',0.5)';
+            }
+
+            return colors[adcode];
+        };
+
+    </script>
+</body>
+
+</html>
