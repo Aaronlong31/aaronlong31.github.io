@@ -56,6 +56,9 @@
         <h3 onclick="toggleControl()">上海疫情数据：3.06 - 3.17 (点击开关)</h3>
         <div id="control">
             <div class="input-item">
+                <input type="text" id="address" onchange="updateAddress()" placeholder="请输入地址" />
+            </div>
+            <div class="input-item">
                 <button class="btn" onclick="heatmap.show()">显示热力图</button>
                 <button class="btn" onclick="heatmap.hide()">关闭热力图</button>
             </div>
@@ -92,7 +95,7 @@
         }
     </script>
     <script type="text/javascript" src='https://a.amap.com/jsapi_demos/static/resource/capitals.js'></script>
-    <script src="https://webapi.amap.com/maps?v=2.0&key=d47c602cf4d4f853784048010297fffa&plugin=AMap.Geocoder"></script>
+    <script src="https://webapi.amap.com/maps?v=2.0&key=d47c602cf4d4f853784048010297fffa&plugin=AMap.Geocoder,AMap.MarkerCluster"></script>
     <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
     <script src="data.js"></script>
     <script src="data2.js"></script>
@@ -139,8 +142,6 @@
             }
 
             return casesGroupByAddress;
-
-
         }
 
 
@@ -178,6 +179,25 @@
             retina: true
         };
         var heatmap;
+        var circle = new AMap.Circle({
+            center: [121.485874, 31.142752],
+            radius: 3000, //半径
+            borderWeight: 3,
+            strokeColor: "#FF33FF",
+            strokeOpacity: 1,
+            strokeWeight: 6,
+            strokeOpacity: 0.2,
+            fillOpacity: 0.4,
+            strokeStyle: 'dashed',
+            strokeDasharray: [10, 10],
+            // 线样式还支持 'dashed'
+            fillColor: '#1791fc',
+            zIndex: 500,
+        });
+
+        map.add(circle);
+        circle.hide();
+
         // 颜色辅助方法
         var colors = {};
         var disProvince;
@@ -210,10 +230,13 @@
 
         }
 
+        var filteredCasesGBA;
         function refresh(cases) {
 
             var casesGroupByAddress = groupByAddress(cases);
+            filteredCasesGBA = casesGroupByAddress;
             map.clearMap();
+            map.add(circle);
             colors = {};
             heatmap.setDataSet({ data: [] });
             if (disProvince) {
@@ -370,6 +393,53 @@
             }
             show = !show;
         }
+
+        var currentMarker = new AMap.Marker();
+        function updateAddress() {
+            var inputAddress = document.getElementById("address").value;
+            geocoder.getLocation(inputAddress, function (status, result) {
+                if (status === 'complete' && result.geocodes.length) {
+                    var lnglat = result.geocodes[0].location
+                    var formattedAddress = result.geocodes[0].formattedAddress;
+                    currentMarker.setPosition(lnglat);
+
+                    map.add(currentMarker);
+                    circle.setCenter(lnglat);
+                    circle.show();
+                    map.setFitView([currentMarker], false, [60, 60, 60, 60], 14);
+                    console.log(lnglat);
+                    filterRange(lnglat.lng, lnglat.lat, formattedAddress);
+                } else {
+                    log.error('根据地址查询位置失败');
+                }
+            });
+
+        }
+
+        function filterRange(lng, lat, formattedAddress) {
+            var content = "";
+            var cc = 0;
+            var confirm = 0;
+            var minDis = 10000000000;
+            filteredCasesGBA.filter(c => {
+                var dis = AMap.GeometryUtil.distance([lng, lat], [c.lng, c.lat]);
+                minDis = minDis < dis ? minDis:dis;
+                return dis <= 3000;
+            }).forEach(c => {
+                cc += c.cases.length;
+                confirm += c.cases.filter(c1 => { return c1.type == "确诊" }).length;
+            });
+            minDis = Math.round(minDis)
+            currentMarker.setLabel({
+                direction: 'top',
+                // offset: new AMap.Pixel(100, 100),  //设置文本标注偏移量
+                content: "<div>"+formattedAddress+"：<br>该地区 3 公里范围内一共有"+confirm+"例确诊，"+(cc-confirm)+"例无症状感染<br>最近的距离是： "+minDis+"米</div>", //设置文本标注内容
+            });
+        }
+
+
+        // 缩放地图到合适的视野级别
+
 
     </script>
 </body>
