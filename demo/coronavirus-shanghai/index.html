@@ -59,8 +59,8 @@
                 <input type="text" id="address" onchange="updateAddress()" placeholder="请输入地址" /><br>
             </div>
             <div class="input-item">
-                选择半径：<input type="range" id="radius" min="0.5" max="5" step="0.5" onchange="updateRadius()" value="3" /> <span
-                    id="radiusText">3</span>公里
+                选择半径：<input type="range" id="radius" min="0.5" max="5" step="0.5" onchange="updateRadius()" value="3" />
+                <span id="radiusText">3</span>公里
             </div>
             <div class="input-item">
                 <button class="btn" onclick="heatmap.show()">显示热力图</button>
@@ -86,8 +86,8 @@
             <div class="input-item" style="margin-right:1rem;">
                 <select id="type" onchange="change()">
                     <option value="">全部</option>
-                    <option value="确诊"">确诊</option>
-                <option value=" 无症状感染">无症状感染</option>
+                    <option value="确诊">确诊</option>
+                    <option value="无症状感染">无症状感染</option>
                 </select>
             </div>
         </div>
@@ -100,7 +100,7 @@
     </script>
     <script type="text/javascript" src='https://a.amap.com/jsapi_demos/static/resource/capitals.js'></script>
     <script
-        src="https://webapi.amap.com/maps?v=2.0&key=d47c602cf4d4f853784048010297fffa&plugin=AMap.Geocoder,AMap.MarkerCluster"></script>
+        src="https://webapi.amap.com/maps?v=2.0&key=d47c602cf4d4f853784048010297fffa&plugin=AMap.Geocoder,AMap.MarkerCluster,AMap.ControlBar,AMap.ToolBar"></script>
     <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
     <script src="data.js"></script>
     <script src="data2.js"></script>
@@ -138,7 +138,7 @@
                 t.cases.push(d);
                 t.type = d.type == "确诊" ? "确诊" : t.type;
                 t.content += "<br><span class=" + (d.type == "确诊" ? "red" : "black") + ">" + d.day + "日 " + d.type + " " + d.sex + " " + d.age + "岁 </span>";
-                t.count += d.type == "确诊" ? 20 : 10;
+                t.count += d.type == "确诊" ? 100 : 10;
                 casesGroupByAddressTmp[d.address] = t;
             });
 
@@ -153,10 +153,27 @@
 
         var map = new AMap.Map('container', {
             center: [121.485874, 31.142752],
-            viewMode: '2D',
+            viewMode: '3D',
+            rotateEnable: true,
+            pitchEnable: true,
             zoom: 10,
             mapStyle: "amap://styles/macaron"
         });
+        var controlBar = new AMap.ControlBar({
+            position: {
+                right: '10px',
+                top: '10px'
+            }
+        });
+        controlBar.addTo(map);
+
+        var toolBar = new AMap.ToolBar({
+            position: {
+                right: '40px',
+                top: '110px'
+            }
+        });
+        toolBar.addTo(map);
 
         var geocoder = new AMap.Geocoder({
             city: "021", //城市设为北京，默认：“全国”
@@ -404,7 +421,7 @@
         function groupAddressCount(cases) {
             heatmap.setDataSet({
                 data: cases,
-                max: 100
+                // max: 300
             });
         }
 
@@ -467,7 +484,7 @@
             currentMarker.setPosition(lnglat);
             map.add(currentMarker);
             circle.setCenter(lnglat);
-            circle.setRadius(radius*1000);
+            circle.setRadius(radius * 1000);
             circle.show();
             currentMarker.show();
             // map.setFitView(circle);
@@ -480,7 +497,7 @@
             filteredCasesGBA.filter(c => {
                 var dis = AMap.GeometryUtil.distance([lnglat.lng, lnglat.lat], [c.lng, c.lat]);
                 minDis = minDis < dis ? minDis : dis;
-                return dis <= radius*1000;
+                return dis <= radius * 1000;
             }).forEach(c => {
                 cc += c.cases.length;
                 confirm += c.cases.filter(c1 => { return c1.type == "确诊" }).length;
@@ -489,7 +506,7 @@
             currentMarker.setLabel({
                 direction: 'top',
                 // offset: new AMap.Pixel(100, 100),  //设置文本标注偏移量
-                content: "<div>" + formattedAddress + "：<br>该地区 "+radius+" 公里范围内一共有" + confirm + "例确诊，" + (cc - confirm) + "例无症状感染<br>最近的距离是： " + minDis + "米</div>", //设置文本标注内容
+                content: "<div>" + formattedAddress + "：<br>该地区 " + radius + " 公里范围内一共有" + confirm + "例确诊，" + (cc - confirm) + "例无症状感染<br>最近的距离是： " + minDis + "米</div>", //设置文本标注内容
             });
         }
 
@@ -503,10 +520,6 @@
             console.log(points);
             cluster.setData(points);
         }
-
-
-        // 缩放地图到合适的视野级别
-
 
     </script>
 </body>
