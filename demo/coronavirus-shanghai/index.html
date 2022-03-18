@@ -56,7 +56,11 @@
         <h3 onclick="toggleControl()">上海疫情数据：3.06 - 3.17 (点击开关)</h3>
         <div id="control">
             <div class="input-item">
-                <input type="text" id="address" onchange="updateAddress()" placeholder="请输入地址" />
+                <input type="text" id="address" onchange="updateAddress()" placeholder="请输入地址" /><br>
+            </div>
+            <div class="input-item">
+                选择半径：<input type="range" id="radius" min="0.5" max="5" step="0.5" onchange="updateRadius()" value="3" /> <span
+                    id="radiusText">3</span>公里
             </div>
             <div class="input-item">
                 <button class="btn" onclick="heatmap.show()">显示热力图</button>
@@ -95,7 +99,8 @@
         }
     </script>
     <script type="text/javascript" src='https://a.amap.com/jsapi_demos/static/resource/capitals.js'></script>
-    <script src="https://webapi.amap.com/maps?v=2.0&key=d47c602cf4d4f853784048010297fffa&plugin=AMap.Geocoder,AMap.MarkerCluster"></script>
+    <script
+        src="https://webapi.amap.com/maps?v=2.0&key=d47c602cf4d4f853784048010297fffa&plugin=AMap.Geocoder,AMap.MarkerCluster"></script>
     <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
     <script src="data.js"></script>
     <script src="data2.js"></script>
@@ -201,6 +206,34 @@
         // 颜色辅助方法
         var colors = {};
         var disProvince;
+        var currentMarker = new AMap.Marker();
+        var currentLnglat;
+        var currentFormattedAddress;
+        var sts = [{
+            url: "//a.amap.com/jsapi_demos/static/images/blue.png",
+            size: new AMap.Size(32, 32),
+            offset: new AMap.Pixel(-16, -16)
+        }, {
+            url: "//a.amap.com/jsapi_demos/static/images/green.png",
+            size: new AMap.Size(32, 32),
+            offset: new AMap.Pixel(-16, -16)
+        }, {
+            url: "//a.amap.com/jsapi_demos/static/images/orange.png",
+            size: new AMap.Size(36, 36),
+            offset: new AMap.Pixel(-18, -18)
+        }, {
+            url: "//a.amap.com/jsapi_demos/static/images/red.png",
+            size: new AMap.Size(48, 48),
+            offset: new AMap.Pixel(-24, -24)
+        }, {
+            url: "//a.amap.com/jsapi_demos/static/images/darkRed.png",
+            size: new AMap.Size(48, 48),
+            offset: new AMap.Pixel(-24, -24)
+        }];
+        var cluster = new AMap.MarkerCluster(map, [], {
+            styles: sts,
+            gridSize: 60
+        });
         // 创建 AMap.LabelsLayer 图层
         var layer = new AMap.LabelsLayer({
             zooms: [3, 20],
@@ -232,6 +265,7 @@
 
         var filteredCasesGBA;
         function refresh(cases) {
+            // clusterMarker(cases);
 
             var casesGroupByAddress = groupByAddress(cases);
             filteredCasesGBA = casesGroupByAddress;
@@ -394,21 +428,22 @@
             show = !show;
         }
 
-        var currentMarker = new AMap.Marker();
         function updateAddress() {
             var inputAddress = document.getElementById("address").value;
+            if (inputAddress.trim() == "") {
+                circle.hide();
+                currentMarker.hide();
+                return;
+            }
             geocoder.getLocation(inputAddress, function (status, result) {
                 if (status === 'complete' && result.geocodes.length) {
                     var lnglat = result.geocodes[0].location
+                    currentLnglat = lnglat;
                     var formattedAddress = result.geocodes[0].formattedAddress;
-                    currentMarker.setPosition(lnglat);
+                    currentFormattedAddress = formattedAddress;
 
-                    map.add(currentMarker);
-                    circle.setCenter(lnglat);
-                    circle.show();
-                    map.setFitView([currentMarker], false, [60, 60, 60, 60], 14);
-                    console.log(lnglat);
-                    filterRange(lnglat.lng, lnglat.lat, formattedAddress);
+                    var radius = document.getElementById("radius").value;
+                    filterRange(radius, lnglat, formattedAddress);
                 } else {
                     log.error('根据地址查询位置失败');
                 }
@@ -416,15 +451,36 @@
 
         }
 
-        function filterRange(lng, lat, formattedAddress) {
+
+        function updateRadius() {
+            var radius = document.getElementById("radius").value;
+            document.getElementById("radiusText").innerText = radius;
+            var inputAddress = document.getElementById("address").value;
+            if (inputAddress.trim() == "") {
+                return;
+            }
+            filterRange(radius, currentLnglat, currentFormattedAddress);
+        }
+
+
+        function filterRange(radius, lnglat, formattedAddress) {
+            currentMarker.setPosition(lnglat);
+            map.add(currentMarker);
+            circle.setCenter(lnglat);
+            circle.setRadius(radius*1000);
+            circle.show();
+            currentMarker.show();
+            map.setFitView(circle);
+            // map.setFitView([currentMarker], false, [60, 60, 60, 60], 14);
+
             var content = "";
             var cc = 0;
             var confirm = 0;
             var minDis = 10000000000;
             filteredCasesGBA.filter(c => {
-                var dis = AMap.GeometryUtil.distance([lng, lat], [c.lng, c.lat]);
-                minDis = minDis < dis ? minDis:dis;
-                return dis <= 3000;
+                var dis = AMap.GeometryUtil.distance([lnglat.lng, lnglat.lat], [c.lng, c.lat]);
+                minDis = minDis < dis ? minDis : dis;
+                return dis <= radius*1000;
             }).forEach(c => {
                 cc += c.cases.length;
                 confirm += c.cases.filter(c1 => { return c1.type == "确诊" }).length;
@@ -433,8 +489,19 @@
             currentMarker.setLabel({
                 direction: 'top',
                 // offset: new AMap.Pixel(100, 100),  //设置文本标注偏移量
-                content: "<div>"+formattedAddress+"：<br>该地区 3 公里范围内一共有"+confirm+"例确诊，"+(cc-confirm)+"例无症状感染<br>最近的距离是： "+minDis+"米</div>", //设置文本标注内容
+                content: "<div>" + formattedAddress + "：<br>该地区 "+radius+" 公里范围内一共有" + confirm + "例确诊，" + (cc - confirm) + "例无症状感染<br>最近的距离是： " + minDis + "米</div>", //设置文本标注内容
             });
+        }
+
+        function clusterMarker(cases) {
+            var points = [];
+            cases.forEach(c => {
+                points.push({
+                    lnglat: [c.lng, c.lat]
+                });
+            });
+            console.log(points);
+            cluster.setData(points);
         }
 
 
